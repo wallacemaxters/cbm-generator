@@ -5,13 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CBM Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/ui-cropper.css">
     <link rel="stylesheet" href="css/default.css">
+    <script src="js/angular.min.js"></script>
+    <script src="js/ng-file-upload-all.min.js"></script>
+    <script src="js/ui-cropper.js"></script>
     <script src="js/app.js" defer></script>
 </head>
-<body>
-    <div class="container">
-        <h1>CBM Generator</h1>
-        <div>Hello World!</div>
+<body ng-app="app">
+    <div class="container" ng-controller="AppController">
+
+        <section ng-switch="opcao">
+            <div class="cropper" ng-switch-when="cortar">
+                <ui-cropper image="imagem.original" result-image="null" result-blob="imagem.editada"></ui-cropper>
+            </div>
+            <div class="cropper" ng-switch-when="escrever">
+                <ui-cropper image="imagem.original" result-image="null" result-blob="imagem.editada"></ui-cropper>
+            </div>
+        </section>
+
+        <button type="file" ng-model="imagem.original" ngf-select>
+            Selecionar Imagem
+        </button>
+
+        <pre ng-bind="imagem"></pre>
     </div>
 </body>
 </html>

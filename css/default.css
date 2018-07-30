@@ -9,3 +9,7 @@ body{
     width: 1200px;
     max-width: 99%;
 }
+
+.cropper{
+    height: 400px;
+}
