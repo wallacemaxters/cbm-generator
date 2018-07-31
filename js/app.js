@@ -146,7 +146,7 @@ angular.module('app', ['ngFileUpload'])
         var object = canvas.getActiveObject(),
             currentIndex = canvas.getObjects().indexOf(object);
 
-        if ([36, 187].indexOf(e.keyCode) >= 0 && object) {
+        if ([36, 107].indexOf(e.keyCode) >= 0 && object) {
 
             object.moveTo(currentIndex + 1);
 
