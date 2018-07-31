@@ -1,7 +1,7 @@
 angular.module('app', ['uiCropper', 'ngFileUpload'])
 
 
-.controller("AppController", function ($scope) {
+.controller("AppController", function ($scope, $cbmWaterMarks, $cbmSources) {
 
     var canvas = new fabric.Canvas('canvas');
 
@@ -15,20 +15,10 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
     };
 
     $scope.waterMark = {};
+    $scope.waterMarks = $cbmWaterMarks;
 
-    $scope.waterMarks = [
-        'une', 'mst', 'psol', 'original'
-    ].map(function (item) { 
-        
-        var url = '/img/cbm-$.png'.replace('$', item);
-
-        return {
-            url: url,
-            style: {
-                backgroundImage: 'url("$")'.replace('$', url)
-            }
-        };
-    });
+    $scope.source = null;
+    $scope.sources = $cbmSources;
 
     $scope.selectWaterMark = function ($index) {
         
@@ -87,6 +77,27 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
         });
     };
 
+    $scope.addSource = function (source) {
+
+        if ($scope.source) {
+            canvas.remove($scope.source);
+        }
+
+        
+        fabric.Image.fromURL(source.url, function (image) {
+            
+            var width = Math.min(image.width, 800);
+            var height = Math.min(image.height, image.height/image.width * 800);
+            
+            canvas.setHeight(height);
+            canvas.setWidth(width);
+            
+            canvas.add(image);
+            
+            $scope.source = image;
+        });
+    }
+
     $scope.changeCanvasHeight = function () {
         if (! $scope.dimensions.height) return;
         canvas.setHeight($scope.dimensions.height);
@@ -99,6 +110,43 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
        
     $scope.selectWaterMark(0);
     
+})
+
+.service('$cbmWaterMarks', function () {
+
+    var list = [
+        'une', 'mst', 'psol', 'original'
+    ];
+    
+    return list.map(function (item) { 
+
+        var url = '/img/cbm-'+ item + '.png';
+
+        return {
+            url: url,
+            style: {
+                backgroundImage: 'url("$")'.replace('$', url)
+            }
+        };
+    })
+})
+
+.service('$cbmSources', function () {
+
+    var list = ['dois-botoes', 'marido-infiel'];
+
+    return list.map(function (item) {
+
+        var url = '/img/sources/' + item + '.jpg';
+
+        return {
+            url: url,
+            style: {
+                backgroundImage: 'url("$")'.replace('$', url)
+            }
+        };
+    });
+
 })
 
 
