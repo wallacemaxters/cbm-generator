@@ -148,13 +148,15 @@ angular.module('app', ['ngFileUpload'])
 
         if ([36, 107].indexOf(e.keyCode) >= 0 && object) {
 
+            e.preventDefault();
+
             object.moveTo(currentIndex + 1);
 
         } else if ([109, 35].indexOf(e.keyCode) >= 0 && object) {
 
-            console.log(object)
+            e.preventDefault();
 
-            object.moveTo(currentIndex - 1)
+            object.moveTo(Math.max(0, currentIndex - 1));
         }
         
     })
