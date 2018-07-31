@@ -93,7 +93,7 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
             canvas.setWidth(width);
             
             canvas.add(image);
-            
+
             $scope.source = image;
         });
     }
@@ -120,7 +120,7 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
     
     return list.map(function (item) { 
 
-        var url = '/img/cbm-'+ item + '.png';
+        var url = 'img/cbm-'+ item + '.png';
 
         return {
             url: url,
@@ -137,7 +137,7 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
 
     return list.map(function (item) {
 
-        var url = '/img/sources/' + item + '.jpg';
+        var url = 'img/sources/' + item + '.jpg';
 
         return {
             url: url,
