@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CBM Generator</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     
     <link rel="stylesheet" href="css/ui-cropper.css">
     <link rel="stylesheet" href="css/flexboxgrid.min.css">
@@ -13,7 +13,6 @@
     <script src="js/angular.min.js"></script>
     <script src="js/ng-file-upload-all.min.js"></script>
     <script src="js/fabric.min.js"></script>
-    <script src="js/ui-cropper.js"></script>
     <script src="js/app.js" defer></script>
 </head>
 <body ng-app="app">
@@ -41,7 +40,6 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-4">
-
                 <div class="group">
                     <label>Selecione um Selo</label>
                     <div class="clear group">
@@ -50,7 +48,7 @@
                         </span>
                     </div>
                 </div>
-
+    
                 <div class="group">
                     <label>Selecione um Source</label>
                     <div class="clear group">
@@ -59,16 +57,15 @@
                         </span>
                     </div>
                 </div>
-
+    
                 <div class="group">
-                    <label>Altura (300 a 800)</label>
-                    <input type="number" min="300" max="800" ng-model="dimensions.height" class="form-control" ng-change="changeCanvasHeight()">
+                    <label>Largura (300 a {{MAX_WIDTH}})</label>
+                    <input type="number" min="300" max="{{MAX_WIDTH}}" ng-model="dimensions.width" class="form-control" ng-change="changeCanvasWidth()">
                 </div>
                 <div class="group">
-                    <label>Largura (300 a 800)</label>
-                    <input type="number" min="300" max="800" ng-model="dimensions.width" class="form-control" ng-change="changeCanvasWidth()">
+                    <label>Altura (300 a {{MAX_HEIGHT}})</label>
+                    <input type="number" min="300" max="{{MAX_HEIGHT}}" ng-model="dimensions.height" class="form-control" ng-change="changeCanvasHeight()">
                 </div>
-
             </div>
         </div>
         

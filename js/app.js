@@ -1,4 +1,4 @@
-angular.module('app', ['uiCropper', 'ngFileUpload'])
+angular.module('app', ['ngFileUpload'])
 
 
 .controller("AppController", function ($scope, $cbmWaterMarks, $cbmSources) {
