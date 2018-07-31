@@ -1,15 +1,30 @@
 angular.module('app', ['ngFileUpload'])
 
 
-.controller("AppController", function ($scope, $cbmWaterMarks, $cbmSources) {
+.controller("AppController", function ($scope, $cbmWaterMarks, $cbmSources, $window) {
 
 
     $scope.MAX_WIDTH = 700;
     $scope.MAX_HEIGHT = 700;
 
-    var canvas = new fabric.Canvas('canvas');
+    var canvas = new fabric.Canvas('canvas', {preserveObjectStacking: true});
 
     canvas.setBackgroundColor('#fefefe');
+
+    canvas.on('object:selected', function (event) {
+        if (! event.target) return;
+
+        $scope.$apply(function () {
+            $scope.activeObject = event.target;
+        });
+
+    })
+
+    canvas.on('selection:cleared', function () {
+
+        $scope.activeObject = null;
+        $scope.$apply();
+    })
 
     $scope.image = {};
 
@@ -123,6 +138,26 @@ angular.module('app', ['ngFileUpload'])
     };
        
     $scope.selectWaterMark(0);
+
+
+    angular.element($window).on('keydown', function (e) {
+
+
+        var object = canvas.getActiveObject(),
+            currentIndex = canvas.getObjects().indexOf(object);
+
+        if ([36, 187].indexOf(e.keyCode) >= 0 && object) {
+
+            object.moveTo(currentIndex + 1);
+
+        } else if ([109, 35].indexOf(e.keyCode) >= 0 && object) {
+
+            console.log(object)
+
+            object.moveTo(currentIndex - 1)
+        }
+        
+    })
     
 })
 

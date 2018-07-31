@@ -32,6 +32,9 @@
                             Adicionar Texto
                         </button>
                     </div>
+                    <div class="help-block" ng-if="activeObject">
+                        Aperte HOME ou + para move o objeto para uma camada acima e END ou - para movê-lo uma camada abaixo
+                    </div>
                     <canvas height="500" width="500" id="canvas" class="cbm-canvas"></canvas>
                     <div class="group">
                         <a ng-click="render()" class="btn btn-primary" download ng-href="{{image.result}}">Salvar Imagem</a>
