@@ -3,8 +3,11 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
 
 .controller("AppController", function ($scope, $cbmWaterMarks, $cbmSources) {
 
-    var canvas = new fabric.Canvas('canvas');
 
+    $scope.MAX_WIDTH = 700;
+    $scope.MAX_HEIGHT = 700;
+
+    var canvas = new fabric.Canvas('canvas');
 
     canvas.setBackgroundColor('#fefefe');
 
@@ -58,8 +61,9 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
             fill: '#fff',
             strokeWidth: 3,
             stroke: "#222",
-            fontSize: 50,
-            fontFamily: 'impact'
+            fontSize: 55,
+            fontFamily: 'impact, sans-serif',
+            width: 400
         });
 
         canvas.add(textbox);
@@ -88,8 +92,8 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
         
         fabric.Image.fromURL(source.url, function (image) {
             
-            var width = Math.min(image.width, 800);
-            var height = Math.min(image.height, image.height/image.width * 800);
+            var width = Math.min(image.width, $scope.MAX_WIDTH);
+            var height = Math.round(Math.min(image.height, image.height/image.width * $scope.MAX_WIDTH));
             
             image.selectable = false;
             
@@ -102,6 +106,9 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
             $scope.waterMark.object.moveTo(canvas.getObjects().length);
 
             $scope.source = image;
+            $scope.dimensions = {height: height, width: width};
+
+            $scope.$apply();
         });
     }
 
@@ -154,81 +161,4 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
         };
     });
 
-})
-
-
-.directive('cbmCanvas', function () {
-
-    var FIXED_HEIGHT = 500;
-
-    return {
-
-        restrict: 'E',
-
-        scope: {
-            srcObject: '=',
-            waterMark: '=',
-        },
-
-        link: function (scope, el, attr) {
-
-            var canvas = angular.element('<canvas></canvas>').addClass('cbm-canvas');
-            var cxt  = canvas[0].getContext('2d');
-            var img = document.createElement('img');
-            
-            el.append(canvas);
-
-            scope.$watch('srcObject', function (srcObject) {
-
-                if (! srcObject) return;
-
-                img.src && URL.revokeObjectURL(img.src);
-                    
-                var src = URL.createObjectURL(srcObject);
-
-                function onLoad() {   
-                    scope.defineCanvas();
-                    scope.defineWaterMark();
-                    angular.element(img).off('load');
-                }
-
-                angular.element(img).attr({src: src}).on('load', onLoad);
-            });
-
-            scope.$watch('waterMark', function (waterMark) {
-
-                if (! waterMark || !scope.srcObject) return;
-
-                scope.defineCanvas();
-                scope.defineWaterMark();
-            });
-
-            scope.defineCanvas = function () {
-
-                var geometry = {
-                    height: FIXED_HEIGHT,
-                    width: img.width/img.height * FIXED_HEIGHT
-                };
-                
-                canvas.attr(geometry);
-
-                cxt.drawImage(img, 0, 0, geometry.width, geometry.height);
-
-                cxt.save();
-            };
-
-            scope.defineWaterMark = function () {
-                
-                var imgWm = document.createElement('img'),
-                    src   = scope.waterMark;
-
-                angular.element(imgWm).attr({src: src, height: 40}).on('load', function () {
-
-                    angular.element(this).off('load');
-
-                    cxt.drawImage(imgWm, canvas[0].width - 100, canvas[0].height - 100, 100, 100);
-                });
-            };
-        }
-    }
 })
