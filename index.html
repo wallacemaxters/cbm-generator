@@ -52,6 +52,15 @@
                 </div>
 
                 <div class="group">
+                    <label>Selecione um Source</label>
+                    <div class="clear group">
+                        <span ng-repeat="s in sources">
+                            <a ng-click="addSource(s)" ng-style="s.style" class="water-mark" ></a>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="group">
                     <label>Altura (300 a 800)</label>
                     <input type="number" min="300" max="800" ng-model="dimensions.height" class="form-control" ng-change="changeCanvasHeight()">
                 </div>
@@ -59,6 +68,7 @@
                     <label>Largura (300 a 800)</label>
                     <input type="number" min="300" max="800" ng-model="dimensions.width" class="form-control" ng-change="changeCanvasWidth()">
                 </div>
+
             </div>
         </div>
         
