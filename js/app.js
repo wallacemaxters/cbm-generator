@@ -5,8 +5,9 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
 
     var canvas = new fabric.Canvas('canvas');
 
+
     canvas.setBackgroundColor('#fefefe');
-    
+
     $scope.image = {};
 
     $scope.dimensions = {
@@ -24,7 +25,7 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
         
         if ($scope.waterMark.object) 
         {
-            canvas.remove($scope.waterMark.object)
+            canvas.remove($scope.waterMark.object);
         }
 
         $scope.waterMark = $scope.waterMarks[$index];
@@ -32,10 +33,11 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
         fabric.Image.fromURL($scope.waterMark.url, function (image) {
         
             image.scale(0.2);
-    
+
             image.opacity = .7;
+
             image.lockRotation = true;
-    
+
             canvas.add(image);
 
             $scope.waterMark.object = image;
@@ -89,10 +91,15 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
             var width = Math.min(image.width, 800);
             var height = Math.min(image.height, image.height/image.width * 800);
             
+            image.selectable = false;
+            
             canvas.setHeight(height);
             canvas.setWidth(width);
-            
+
             canvas.add(image);
+
+
+            $scope.waterMark.object.moveTo(canvas.getObjects().length);
 
             $scope.source = image;
         });
