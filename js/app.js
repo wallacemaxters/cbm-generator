@@ -8,7 +8,7 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
     canvas.setBackgroundColor('#fefefe');
     
     $scope.image = {};
-    
+
     $scope.dimensions = {
         height: canvas.height,
         width: canvas.width
@@ -78,9 +78,23 @@ angular.module('app', ['uiCropper', 'ngFileUpload'])
         if ($file === null) return;
 
         fabric.Image.fromURL(URL.createObjectURL($file), function (image) {
+
+            if (image.width > canvas.width) {
+                image.scale(canvas.width / image.width)
+            }
+
             canvas.add(image)
-            console.log(image)
         });
+    };
+
+    $scope.changeCanvasHeight = function () {
+        if (! $scope.dimensions.height) return;
+        canvas.setHeight($scope.dimensions.height);
+    };
+
+    $scope.changeCanvasWidth = function () {
+        if (! $scope.dimensions.width) return;
+        canvas.setWidth($scope.dimensions.width);
     };
        
     $scope.selectWaterMark(0);
