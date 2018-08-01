@@ -6,38 +6,43 @@ angular.module('app', ['ngFileUpload'])
 
     $scope.MAX_WIDTH = 700;
     $scope.MAX_HEIGHT = 700;
-
-    var canvas = new fabric.Canvas('canvas', {preserveObjectStacking: true});
-
-    canvas.setBackgroundColor('#fefefe');
-
-    canvas.on('object:selected', function (event) {
-        if (! event.target) return;
-
-        $scope.$apply(function () {
-            $scope.activeObject = event.target;
-        });
-
-    })
-
-    canvas.on('selection:cleared', function () {
-
-        $scope.activeObject = null;
-        $scope.$apply();
-    })
-
+    
+    $scope.activeObject = null;
+    
     $scope.image = {};
-
-    $scope.dimensions = {
-        height: canvas.height,
-        width: canvas.width
-    };
 
     $scope.waterMark = {};
     $scope.waterMarks = $cbmWaterMarks;
 
     $scope.source = null;
     $scope.sources = $cbmSources;
+
+    var canvas = $scope.canvas = new fabric.Canvas('canvas', {preserveObjectStacking: true});
+
+    $scope.dimensions = {
+        height: canvas.height,
+        width: canvas.width
+    };
+
+    canvas.setBackgroundColor('#fefefe');
+
+    canvas.on('mouse:down', function (event) {
+
+        if (! event.target) return;
+
+        $scope.activeObject = canvas.getActiveObject();
+
+        $scope.$applyAsync();
+    });
+
+    canvas.on('selection:cleared', function () {
+
+        $scope.activeObject = null;
+        $scope.$applyAsync();
+    });
+
+
+
 
     $scope.selectWaterMark = function ($index) {
         
@@ -50,13 +55,15 @@ angular.module('app', ['ngFileUpload'])
 
         fabric.Image.fromURL($scope.waterMark.url, function (image) {
         
-            image.scale(0.2);
+            image.scale(0.3);
 
             image.opacity = .7;
 
-            image.lockRotation = true;
-
             canvas.add(image);
+
+            canvas.centerObject(image)
+
+            image.isWaterMark = true;
 
             $scope.waterMark.object = image;
         });
@@ -65,6 +72,13 @@ angular.module('app', ['ngFileUpload'])
 
     $scope.render = function () {
         $scope.image.result = canvas.toDataURL('png');
+    };
+
+    $scope.removeObject = function (activeObject) {
+
+        if (activeObject.name === 'waterMark') return;
+
+        canvas.remove(activeObject);
     };
 
 
@@ -77,7 +91,7 @@ angular.module('app', ['ngFileUpload'])
             strokeWidth: 3,
             stroke: "#222",
             fontSize: 55,
-            fontFamily: 'impact, sans-serif',
+            fontFamily: 'impact',
             width: 400
         });
 
@@ -110,17 +124,18 @@ angular.module('app', ['ngFileUpload'])
             var width = Math.min(image.width, $scope.MAX_WIDTH);
             var height = Math.round(Math.min(image.height, image.height/image.width * $scope.MAX_WIDTH));
             
-            image.selectable = false;
+            //image.selectable = false;
             
             canvas.setHeight(height);
             canvas.setWidth(width);
 
-            canvas.add(image);
 
+            canvas.add(image);
 
             $scope.waterMark.object.moveTo(canvas.getObjects().length);
 
             $scope.source = image;
+
             $scope.dimensions = {height: height, width: width};
 
             $scope.$apply();
@@ -140,11 +155,27 @@ angular.module('app', ['ngFileUpload'])
     $scope.selectWaterMark(0);
 
 
+    $scope.resizeCanvas = function () {
+
+        var width = Math.min(window.innerWidth || screen.width, $scope.MAX_WIDTH);
+
+        var height = (canvas.height/canvas.width) * width;
+
+        canvas.setWidth(width - 50);
+
+        canvas.setHeight(height);
+
+        canvas.centerObject($scope.waterMark.object)
+
+    };
+
+
     angular.element($window).on('keydown', function (e) {
 
 
         var object = canvas.getActiveObject(),
             currentIndex = canvas.getObjects().indexOf(object);
+
 
         if ([36, 107].indexOf(e.keyCode) >= 0 && object) {
 
@@ -157,16 +188,21 @@ angular.module('app', ['ngFileUpload'])
             e.preventDefault();
 
             object.moveTo(Math.max(0, currentIndex - 1));
+
+        } else if (e.keyCode === 46 && e.ctrlKey) {
+
+            object.isWaterMark || canvas.remove(object);
         }
         
     })
+    .on('resize load', $scope.resizeCanvas)
     
 })
 
 .service('$cbmWaterMarks', function () {
 
     var list = [
-        'une', 'mst', 'psol', 'original'
+        'original', 'une', 'mst', 'psol', 'cunha'
     ];
     
     return list.map(function (item) { 
@@ -184,7 +220,11 @@ angular.module('app', ['ngFileUpload'])
 
 .service('$cbmSources', function () {
 
-    var list = ['dois-botoes', 'marido-infiel'];
+    var list = [
+        'dois-botoes', 'marido-infiel', 'bolso-peixe', 'bolso-tiro',
+        'drake',
+        'ave-temer'
+    ];
 
     return list.map(function (item) {
 

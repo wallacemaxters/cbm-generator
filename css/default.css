@@ -10,6 +10,11 @@ body{
     background-color: #f1f1f1;
 }
 
+h1{
+    font-size: 40px;
+    margin: 10px 0;
+}
+
 .clear::after, .clear::before{
     content: ' ';
     display: block;
@@ -24,8 +29,13 @@ body{
     text-align: center;
 }
 
+.text-right{
+    text-align: right;;
+}
+
 .image-editor{
-    
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .canvas-container{
@@ -35,7 +45,7 @@ body{
 .cbm-canvas{
     display: block;
     box-shadow: 0 0 4px #ccc;
-    max-width: 98%;
+    
 }
 
 
@@ -84,19 +94,22 @@ body{
     font-family: Roboto, Tahoma, sans-serif;
     font-weight: bold;
     border-radius: 4px;
-    box-shadow: 0 2px 2px #555;
+    border: 1px solid #ccc;
     outline: none;
     font-size: 14px;
+    margin: 5px 0;
+    text-align: center;;
 }
 
 .btn.btn-primary{
     background-color: #049;
     color: white;
+    border: 1px solid #039;
 }
 
 .btn:active{
     box-shadow: 0 0 0 transparent;
-    transform: translateY(2px)
+    transform: translateY(2px);
 }
 
 
@@ -118,3 +131,17 @@ label{
     border-radius: 4px;
     outline: none;
 }
+
+@media screen and (max-width: 800px) {
+
+    .btn
+    {
+        width: 100%;
+        display: block;
+    }
+
+    .container{
+        padding: 0 15px;
+    }
+}
+

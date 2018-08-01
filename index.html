@@ -17,32 +17,83 @@
 </head>
 <body ng-app="app">
     <div class="container" ng-controller="AppController">
-        
-        <h1>CBM Generator</h1>
-
+        <h1 class="text-center">CBM Generator</h1>
         <div class="row">
-            <div class="col-xs-12 col-sm-8">
-                <div class="image-editor">
-                    
-                    <div class="group">
-                        <button type="file" ngf-select="addImage($file)" ngf-accept="'image/*'" class="btn btn-primary">
-                            Adicionar Imagem
-                        </button>
-                        <button ng-click="addText()" class="btn">
-                            Adicionar Texto
-                        </button>
-                    </div>
-                    <div class="help-block" ng-if="activeObject">
-                        Aperte HOME ou + para move o objeto para uma camada acima e END ou - para movê-lo uma camada abaixo
-                    </div>
-                    <canvas height="500" width="500" id="canvas" class="cbm-canvas"></canvas>
-                    <div class="group">
-                        <a ng-click="render()" class="btn btn-primary" download ng-href="{{image.result}}">Salvar Imagem</a>
+
+           <div class="col-xs-12 col-sm-4">
+            <div ng-if="activeObject" style="padding: 10px; background-color: #fff">
+                <div>
+                    <h4>Efeitos do Objeto</h4>
+                    <div class="group" >
+                        <label>Opacidade</label>
+                        <input type="number" min="0.1" max="1" step="0.05" ng-model="activeObject.opacity" class="form-control" ng-change="canvas.renderAll()">
                     </div>
 
+                    <div class="group">
+                        <label>
+                            <input type="checkbox" ng-model="activeObject.flipX" ng-change="canvas.renderAll()">
+                            Espelho Horizontal
+                        </label>
+                    </div>
+
+                    <div class="group">
+                        <label>
+                            <input type="checkbox" ng-model="activeObject.flipY" ng-change="canvas.renderAll()">
+                            Espelho Vertical
+                        </label>
+                    </div>
+
+                    <div class="group">
+                        <label>Ângulo</label>
+                        <input type="number" min="0" max="360" ng-model="activeObject.angle" ng-change="canvas.renderAll()" class='form-control'>
+                    </div>
+
+
+                    <div class="group">
+                        <label>
+                            <input type="checkbox" ng-model="activeObject.lockMovementX">
+                            Bloquear movimento horizontal
+                        </label>
+                    </div>
+                    <div class="group">
+                        <label>
+                            <input type="checkbox" ng-model="activeObject.lockMovementY">
+                            Bloqueiar Movimento Vertical
+                        </label>
+                    </div>
                 </div>
+
+                <div class="help-block" ng-if="activeObject">
+                    <strong>Teclas</strong><br>
+                    <kbd>HOME</kbd> ou <kbd>+</kbd> para mover o objeto para uma camada acima <br>
+                    <kbd>END</kbd> ou <kbd>-</kbd> para movê-lo uma camada abaixo<br>
+                    <kbd>CTRL+DELETE</kbd> para remover
+                </div>
+
             </div>
-            <div class="col-xs-12 col-sm-4">
+        </div>
+        <div class="col-xs-12 col-sm-8">
+
+            <div class="image-editor">
+                <div class="group">
+                    <button type="file" ngf-select="addImage($file)" ngf-accept="'image/*'" class="btn btn-primary">
+                        Adicionar Imagem
+                    </button>
+                    <button ng-click="addText()" class="btn">
+                        Adicionar Texto
+                    </button>
+                    <button class="btn" ng-click="removeObject(activeObject)" ng-if="activeObject && !activeObject.isWaterMark">
+                        Remover Objeto
+                    </button>
+                    
+                    <a ng-click="render()" class="btn btn-primary" download ng-href="{{image.result}}">Baixar Imagem</a>
+                    
+                </div>
+                
+                <div class="group">
+                    <canvas height="500" width="700" id="canvas" class="cbm-canvas"></canvas>
+                </div>
+
                 <div class="group">
                     <label>Selecione um Selo</label>
                     <div class="clear group">
@@ -51,27 +102,20 @@
                         </span>
                     </div>
                 </div>
-    
+
                 <div class="group">
                     <label>Selecione um Source</label>
                     <div class="clear group">
                         <span ng-repeat="s in sources">
-                            <a ng-click="addSource(s)" ng-style="s.style" class="water-mark" ></a>
+                            <a ng-click="addSource(s)" ng-style="s.style" href="#" class="water-mark" ></a>
                         </span>
                     </div>
                 </div>
-    
-                <div class="group">
-                    <label>Largura (300 a {{MAX_WIDTH}})</label>
-                    <input type="number" min="300" max="{{MAX_WIDTH}}" ng-model="dimensions.width" class="form-control" ng-change="changeCanvasWidth()">
-                </div>
-                <div class="group">
-                    <label>Altura (300 a {{MAX_HEIGHT}})</label>
-                    <input type="number" min="300" max="{{MAX_HEIGHT}}" ng-model="dimensions.height" class="form-control" ng-change="changeCanvasHeight()">
-                </div>
             </div>
         </div>
-        
+
     </div>
+
+</div>
 </body>
 </html>
