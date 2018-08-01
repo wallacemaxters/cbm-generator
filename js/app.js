@@ -157,6 +157,8 @@ angular.module('app', ['ngFileUpload'])
 
     $scope.resizeCanvas = function () {
 
+        if (window.innerWidth > 800) return;
+
         var width = Math.min(window.innerWidth || screen.width, $scope.MAX_WIDTH);
 
         var height = (canvas.height/canvas.width) * width;
