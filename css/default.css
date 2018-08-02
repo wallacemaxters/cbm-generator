@@ -2,6 +2,8 @@
     box-sizing: border-box;
 }
 
+
+
 body{
     margin: 0;
     padding: 0;
@@ -32,6 +34,11 @@ h1{
 .text-right{
     text-align: right;;
 }
+
+.pull-right{
+    float: right;
+}
+
 
 .image-editor{
     margin-top: 50px;
@@ -99,12 +106,24 @@ h1{
     font-size: 14px;
     margin: 5px 0;
     text-align: center;;
+    cursor: pointer;
 }
 
 .btn.btn-primary{
     background-color: #049;
     color: white;
     border: 1px solid #039;
+}
+
+.btn.btn-danger
+{
+    background-color: #B00;
+    color: white;
+}
+
+.btn.btn-success{
+    background-color: #00b640;
+    color: white;
 }
 
 .btn:active{
@@ -133,12 +152,6 @@ label{
 }
 
 @media screen and (max-width: 800px) {
-
-    .btn
-    {
-        width: 100%;
-        display: block;
-    }
 
     .container{
         padding: 0 15px;
