@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/ui-cropper.css">
     <link rel="stylesheet" href="css/flexboxgrid.min.css">
     <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="js/angular.min.js"></script>
     <script src="js/ng-file-upload-all.min.js"></script>
@@ -74,19 +75,26 @@
         </div>
         <div class="col-xs-12 col-sm-8">
 
-            <div class="image-editor">
+            <div class="image-editor clear">
                 <div class="group">
-                    <button type="file" ngf-select="addImage($file)" ngf-accept="'image/*'" class="btn btn-primary">
-                        Adicionar Imagem
+                    <button type="file" ngf-select="addImage($file)" ngf-accept="'image/*'" class="btn btn-primary" title="Adicionar Imagem">
+                        <i class="fa fa-image fa-fw"></i>
                     </button>
-                    <button ng-click="addText()" class="btn">
-                        Adicionar Texto
+                    <button ng-click="addText()" class="btn" title="Adicionar Texto">
+                        <i class="fa fa-font fa-fw"></i>
                     </button>
-                    <button class="btn" ng-click="removeObject(activeObject)" ng-if="activeObject && !activeObject.isWaterMark">
-                        Remover Objeto
+                    <button class="btn" ng-click="canvas.centerObject(activeObject)" ng-if="activeObject" title="Centralizar">
+                        <i class="fa fa-align-center fa-fw"></i>
                     </button>
+
+                    <button class="btn btn-danger" ng-click="removeObject(activeObject)" ng-if="activeObject && !activeObject.isWaterMark" title="Remover Objeto">
+                        <i class="fa fa-trash fa-fw"></i>
+                    </button>
+
                     
-                    <a ng-click="render()" class="btn btn-primary" download ng-href="{{image.result}}">Baixar Imagem</a>
+                    <a ng-click="render()" class="btn btn-success" download ng-href="{{image.result}}" title="Baixar Imagem">
+                        <i class="fa fa-download fa-fw"></i>
+                    </a>
                     
                 </div>
                 
