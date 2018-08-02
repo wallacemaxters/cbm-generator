@@ -1,6 +1,5 @@
 angular.module('app', ['ngFileUpload'])
 
-
 .controller("AppController", function ($scope, $cbmWaterMarks, $cbmSources, $window) {
 
 
@@ -19,11 +18,6 @@ angular.module('app', ['ngFileUpload'])
 
     var canvas = $scope.canvas = new fabric.Canvas('canvas', {preserveObjectStacking: true});
 
-    $scope.dimensions = {
-        height: canvas.height,
-        width: canvas.width
-    };
-
     canvas.setBackgroundColor('#fefefe');
 
     canvas.on('mouse:down', function (event) {
@@ -40,9 +34,6 @@ angular.module('app', ['ngFileUpload'])
         $scope.activeObject = null;
         $scope.$applyAsync();
     });
-
-
-
 
     $scope.selectWaterMark = function ($index) {
         
@@ -92,7 +83,7 @@ angular.module('app', ['ngFileUpload'])
             stroke: "#222",
             fontSize: 55,
             fontFamily: 'impact',
-            width: 400
+            width: 300
         });
 
         canvas.add(textbox);
@@ -118,103 +109,106 @@ angular.module('app', ['ngFileUpload'])
             canvas.remove($scope.source);
         }
 
-        
         fabric.Image.fromURL(source.url, function (image) {
             
-            var width = Math.min(image.width, $scope.MAX_WIDTH);
-            var height = Math.round(Math.min(image.height, image.height/image.width * $scope.MAX_WIDTH));
-            
-            //image.selectable = false;
-            
-            canvas.setHeight(height);
-            canvas.setWidth(width);
+            var width = Math.min($window.innerWidth || $window.screen.width, image.width, $scope.MAX_WIDTH) - 50;
 
+            image.scaleToWidth(width);
 
             canvas.add(image);
+    
+            canvas.setWidth(image.getScaledWidth());
+            canvas.setHeight(image.getScaledHeight());
 
             $scope.waterMark.object.moveTo(canvas.getObjects().length);
 
             $scope.source = image;
 
-            $scope.dimensions = {height: height, width: width};
+            canvas.renderAll();
 
             $scope.$apply();
         });
-    }
-
-    $scope.changeCanvasHeight = function () {
-        if (! $scope.dimensions.height) return;
-        canvas.setHeight($scope.dimensions.height);
     };
 
-    $scope.changeCanvasWidth = function () {
-        if (! $scope.dimensions.width) return;
-        canvas.setWidth($scope.dimensions.width);
-    };
+
+
+    $scope.ajustCanvasToSource = function (width)
+    {
+
+        var width = width || Math.min($window.innerWidth || $window.screen.width, $scope.MAX_WIDTH) - 50;
        
-    $scope.selectWaterMark(0);
+        canvas.setWidth(width);
+        $scope.source.scaleToWidth(width);
+        canvas.setHeight($scope.source.getScaledHeight());
 
+        $scope.$applyAsync();
+    };
 
     $scope.resizeCanvas = function () {
-
-        if (window.innerWidth > 768) return;
-
-        var width = Math.min(window.innerWidth || screen.width, $scope.MAX_WIDTH) - 50;
-
+        
+        if ($window.innerWidth > 768) return;
+        
+        var width = Math.min($window.innerWidth || screen.width, $scope.MAX_WIDTH) - 50;
+        
         var height = Math.min((canvas.height/canvas.width) * width, $scope.MAX_HEIGHT);
-
-        canvas.setWidth(width);
-
-        canvas.setHeight(height);
-
-        canvas.centerObject($scope.waterMark.object)
-
-    };
-
-
-    angular.element($window).on('keydown', function (e) {
-
-
-        var object = canvas.getActiveObject(),
-            currentIndex = canvas.getObjects().indexOf(object);
-
-
-        if ([36, 107].indexOf(e.keyCode) >= 0 && object) {
-
-            e.preventDefault();
-
-            object.moveTo(currentIndex + 1);
-
-        } else if ([109, 35].indexOf(e.keyCode) >= 0 && object) {
-
-            e.preventDefault();
-
-            object.moveTo(Math.max(0, currentIndex - 1));
-
-        } else if (e.keyCode === 46 && e.ctrlKey) {
-
-            object.isWaterMark || canvas.remove(object);
+        
+        if ($scope.source)
+        {
+            $scope.ajustCanvasToSource();
+        }
+        else
+        {
+            canvas.setWidth(width);    
+            canvas.setHeight(height);
         }
         
+        canvas.centerObject($scope.waterMark.object)
+    };
+    
+    $scope.selectWaterMark(0);
+
+    angular.element($window).on('keydown', function (e) {
+        
+        var object = canvas.getActiveObject(),
+            currentIndex = canvas.getObjects().indexOf(object);
+            
+            
+            if ([36, 107].indexOf(e.keyCode) >= 0 && object) {
+
+                e.preventDefault();
+                
+                object.moveTo(currentIndex + 1);
+                
+            } else if ([109, 35].indexOf(e.keyCode) >= 0 && object) {
+                
+                e.preventDefault();
+                
+                object.moveTo(Math.max(0, currentIndex - 1));
+                
+            } else if (e.keyCode === 46 && e.ctrlKey) {
+                
+                object.isWaterMark || canvas.remove(object);
+            }
+            
+        })
+        .on('resize load', $scope.resizeCanvas)
+        
     })
-    .on('resize load', $scope.resizeCanvas)
     
-})
-
-.service('$cbmWaterMarks', function () {
-
-    var list = [
-        'original', 'une', 'mst', 'psol', 'cunha'
-    ];
-    
-    return list.map(function (item) { 
-
-        var url = 'img/cbm-'+ item + '.png';
-
-        return {
-            url: url,
-            style: {
-                backgroundImage: 'url("$")'.replace('$', url)
+    .service('$cbmWaterMarks', function () {
+        
+        var list = [
+            'original', 'une', 'mst', 'psol', 'cunha'
+        ];
+        
+        return list.map(function (item) { 
+            
+            var url = 'img/cbm-'+ item + '.png';
+            
+            return {
+                url: url,
+                style: {
+                    backgroundImage: 'url("$")'.replace('$', url)
             }
         };
     })
