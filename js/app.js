@@ -225,7 +225,9 @@ angular.module('app', ['ngFileUpload'])
 
     var list = [
         'dois-botoes', 'marido-infiel', 'bolso-peixe', 'bolso-tiro',
-        'drake', 'ave-temer', 'lula-molusco', 'nivel-de-gado'
+        'drake', 'ave-temer', 'lula-molusco', 'nivel-de-gado', 'boxe-temer',
+        'spider-man', 'reuniao', 'lendo-livro', 'cachorro-nao-morde',
+        'que-tipo', 'faustao'
     ];
 
     return list.map(function (item) {
