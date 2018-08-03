@@ -86,7 +86,10 @@ angular.module('app', ['ngFileUpload'])
             width: 300
         });
 
-        canvas.add(textbox);
+        setTimeout(function () {
+            canvas.add(textbox);
+        },10);
+
     };
 
     $scope.addImage = function ($file) {

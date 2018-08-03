@@ -3,6 +3,12 @@
 }
 
 
+@font-face{
+    font-family: impact;
+    src: url('../fonts/impact.woff') format('woff'), 
+         url("../fonts/impact.ttf") format('truetype');
+}
+
 
 body{
     margin: 0;
