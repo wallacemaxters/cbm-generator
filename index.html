@@ -109,6 +109,12 @@
                         <span ng-repeat="s in sources">
                             <a ng-click="addSource(s)" ng-style="s.style" href="#" class="water-mark" ></a>
                         </span>
+
+                        <span>
+                            <a ngf-select="addCustomSource($file)" class="water-mark icon">
+                                <i class="fa fa-plus fa-w"></i>
+                            </a>
+                        </span>
                     </div>
                 </div>
             </div>

@@ -112,12 +112,18 @@ angular.module('app', ['ngFileUpload'])
         });
     };
 
+    $scope.addCustomSource = function ($file) {
+
+        $scope.addSource({
+            url: URL.createObjectURL($file)
+        });
+    };
+
     $scope.addSource = function (source) {
 
         if ($scope.source) {
             canvas.remove($scope.source);
         }
-
         
         fabric.Image.fromURL(source.url, function (image) {
             
@@ -129,7 +135,6 @@ angular.module('app', ['ngFileUpload'])
             canvas.setHeight(height);
             canvas.setWidth(width);
 
-
             canvas.add(image);
 
             $scope.waterMark.object.moveTo(canvas.getObjects().length);
@@ -138,7 +143,7 @@ angular.module('app', ['ngFileUpload'])
 
             $scope.dimensions = {height: height, width: width};
 
-            $scope.$apply();
+            $scope.$applyAsync();
         });
     }
 

@@ -60,6 +60,7 @@ h1{
     border-radius: 100%;
     border: 3px solid #ccc;
     cursor: pointer;
+
 }
 
 .water-mark:hover{
@@ -68,6 +69,10 @@ h1{
 
 .water-mark.active{
     border-color: #049;
+}
+
+.water-mark.icon{
+    background-color: tomato;
 }
 
 .no-grow{
