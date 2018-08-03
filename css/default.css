@@ -2,6 +2,8 @@
     box-sizing: border-box;
 }
 
+
+
 body{
     margin: 0;
     padding: 0;
@@ -33,6 +35,11 @@ h1{
     text-align: right;;
 }
 
+.pull-right{
+    float: right;
+}
+
+
 .image-editor{
     margin-top: 50px;
     margin-bottom: 50px;
@@ -60,6 +67,7 @@ h1{
     border-radius: 100%;
     border: 3px solid #ccc;
     cursor: pointer;
+    float: left;
 
 }
 
@@ -72,7 +80,12 @@ h1{
 }
 
 .water-mark.icon{
-    background-color: tomato;
+    background-color: steelblue;
+    color: white;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 38px;
 }
 
 .no-grow{
@@ -104,12 +117,24 @@ h1{
     font-size: 14px;
     margin: 5px 0;
     text-align: center;;
+    cursor: pointer;
 }
 
 .btn.btn-primary{
     background-color: #049;
     color: white;
     border: 1px solid #039;
+}
+
+.btn.btn-danger
+{
+    background-color: #B00;
+    color: white;
+}
+
+.btn.btn-success{
+    background-color: #00b640;
+    color: white;
 }
 
 .btn:active{
@@ -138,12 +163,6 @@ label{
 }
 
 @media screen and (max-width: 800px) {
-
-    .btn
-    {
-        width: 100%;
-        display: block;
-    }
 
     .container{
         padding: 0 15px;
