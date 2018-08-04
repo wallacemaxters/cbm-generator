@@ -234,7 +234,7 @@ angular.module('app', ['ngFileUpload'])
         'dois-botoes', 'marido-infiel', 'bolso-peixe', 'bolso-tiro',
         'drake', 'ave-temer', 'lula-molusco', 'nivel-de-gado', 'boxe-temer',
         'spider-man', 'reuniao', 'lendo-livro', 'cachorro-nao-morde',
-        'que-tipo', 'faustao'
+        'que-tipo', 'dois-botoes-esquerda',
     ];
     return list.map(function (item) {
 
