@@ -62,7 +62,11 @@ angular.module('app', ['ngFileUpload'])
     };
 
     $scope.render = function () {
-        $scope.image.result = canvas.toDataURL('png');
+        canvas.renderAll();
+        $scope.image.result = canvas.toDataURL({
+            format: 'jpeg',
+            quality: 0.9
+        });
     };
 
     $scope.removeObject = function (activeObject) {
@@ -232,7 +236,6 @@ angular.module('app', ['ngFileUpload'])
         'spider-man', 'reuniao', 'lendo-livro', 'cachorro-nao-morde',
         'que-tipo', 'faustao'
     ];
-
     return list.map(function (item) {
 
         var url = 'img/sources/' + item + '.jpg';
