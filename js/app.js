@@ -1,6 +1,6 @@
 angular.module('app', ['ngFileUpload'])
 
-.controller("AppController", function ($scope, $cbmWaterMarks, $cbmSources, $window) {
+.controller("AppController", function ($scope, $cbmWaterMarks, $cbmSources, $window, $http) {
 
 
     $scope.MAX_WIDTH = 700;
@@ -96,21 +96,47 @@ angular.module('app', ['ngFileUpload'])
 
     };
 
-    $scope.addImage = function ($file) {
-        
-        if ($file === null) return;
+    $scope.addImage = function (url) {
 
-        fabric.Image.fromURL(URL.createObjectURL($file), function (image) {
+        return fabric.Image.fromURL(url, function (image) {
 
             if (image.width > canvas.width) {
                 image.scale(canvas.width / image.width)
             }
 
-            canvas.add(image)
+            canvas.add(image);
+        });
+    }
+
+    $scope.addFromUrl = function () {
+
+        var url = prompt('Cole a url da imagem aqui');
+        $http.get(url, {responseType: 'blob'}).then(function (response) {
+            return $scope.addImage(URL.createObjectURL(response.data));
+        }, function () {
+            alert('Erro ao adicionar url')
+        });    
+    };
+
+    $scope.addImageFromBlob = function ($file) {
+        
+        if ($file === null) return;
+
+        return $scope.addImage(URL.createObjectURL($file));
+    };
+
+    $scope.addSourceFromUrl = function () {
+
+        var url = prompt('Cole a url da imagem aqui');
+
+        $http.get(url, {responseType: 'blob'}).then(function (response) {
+            $scope.addSource({
+                url: URL.createObjectURL(response.data)
+            });
         });
     };
 
-    $scope.addCustomSource = function ($file) {
+    $scope.addSourceFromBlob = function ($file) {
 
         $scope.addSource({
             url: URL.createObjectURL($file)
@@ -234,7 +260,7 @@ angular.module('app', ['ngFileUpload'])
         'dois-botoes', 'marido-infiel', 'bolso-peixe', 'bolso-tiro',
         'drake', 'ave-temer', 'lula-molusco', 'nivel-de-gado', 'boxe-temer',
         'spider-man', 'reuniao', 'lendo-livro', 'cachorro-nao-morde',
-        'que-tipo', 'dois-botoes-esquerda',
+        'que-tipo', 'dois-botoes-esquerda', 'boa-ideia',
     ];
     return list.map(function (item) {
 

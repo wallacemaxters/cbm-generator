@@ -14,7 +14,7 @@
     <script src="js/angular.min.js"></script>
     <script src="js/ng-file-upload-all.min.js"></script>
     <script src="js/fabric.min.js"></script>
-    <script src="js/app.js" defer></script>
+    <script src="js/app.js?t=2018-08-08T01:31:38.709Z" defer></script>
 </head>
 <body ng-app="app">
     <div class="container" ng-controller="AppController">
@@ -83,8 +83,11 @@
 
             <div class="image-editor clear">
                 <div class="group">
-                    <button type="file" ngf-select="addImage($file)" ngf-accept="'image/*'" class="btn btn-primary" title="Adicionar Imagem">
+                    <button type="file" ngf-select="addImageFromBlob($file)" ngf-accept="'image/*'" class="btn btn-primary" title="Adicionar Imagem do computador">
                         <i class="fa fa-image fa-fw"></i>
+                    </button>
+                    <button type="file" ng-click="addFromUrl()" class="btn btn-primary" title="Adicionar Imagem por um link">
+                        <i class="fa fa-link fa-fw"></i>
                     </button>
                     <button ng-click="addText()" class="btn" title="Adicionar Texto">
                         <i class="fa fa-font fa-fw"></i>
@@ -125,8 +128,13 @@
                         </span>
 
                         <span>
-                            <a title="Source personalizado" ngf-accept="'image/*'" ngf-select="addCustomSource($file)" class="water-mark icon">
+                            <a title="Adicionar source do computador" ngf-accept="'image/*'" ngf-select="addSourceFromBlob($file)" class="water-mark icon">
                                <i class="fa fa-plus"></i>
+                            </a>
+                        </span>
+                        <span>
+                            <a title="Adicionar source por link" ng-click="addSourceFromUrl($file)" class="water-mark icon">
+                               <i class="fa fa-link"></i>
                             </a>
                         </span>
                     </div>
