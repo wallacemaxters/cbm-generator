@@ -105,17 +105,14 @@ angular.module('app', ['ngFileUpload'])
             }
 
             canvas.add(image);
-        });
+        }, {crossOrigin:'Anonymous'});
     }
 
     $scope.addFromUrl = function () {
 
         var url = prompt('Cole a url da imagem aqui');
-        $http.get(url, {responseType: 'blob'}).then(function (response) {
-            return $scope.addImage(URL.createObjectURL(response.data));
-        }, function () {
-            alert('Erro ao adicionar url')
-        });    
+
+        $scope.addImage(url);    
     };
 
     $scope.addImageFromBlob = function ($file) {
@@ -129,12 +126,8 @@ angular.module('app', ['ngFileUpload'])
 
         var url = prompt('Cole a url da imagem aqui');
 
-        $http.get(url, {responseType: 'blob'}).then(function (response) {
-            $scope.addSource({
-                url: URL.createObjectURL(response.data)
-            });
-        }, function () {
-            alert('Erro ao adicionar url')
+        $scope.addSource({
+            url: url
         });
     };
 
@@ -169,7 +162,8 @@ angular.module('app', ['ngFileUpload'])
             canvas.renderAll();
 
             $scope.$applyAsync();
-        });
+
+        }, {crossOrigin:'Anonymous'});
     };
 
 
