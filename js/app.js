@@ -133,6 +133,8 @@ angular.module('app', ['ngFileUpload'])
             $scope.addSource({
                 url: URL.createObjectURL(response.data)
             });
+        }, function () {
+            alert('Erro ao adicionar url')
         });
     };
 
