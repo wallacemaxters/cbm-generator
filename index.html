@@ -8,11 +8,14 @@
     
     <link rel="stylesheet" href="css/ui-cropper.css">
     <link rel="stylesheet" href="css/flexboxgrid.min.css">
+    <link rel="stylesheet" href="css/angularjs-color-picker.min.css">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <script src="js/tinycolor-min.js"></script>
     <script src="js/angular.min.js"></script>
     <script src="js/ng-file-upload-all.min.js"></script>
+    <script src="js/angularjs-color-picker.min.js"></script>
     <script src="js/fabric.min.js"></script>
     <script src="js/app.js?t=2018-08-08T01:31:38.709Z" defer></script>
 </head>
@@ -68,6 +71,23 @@
                             Ativar Seleção do Objeto
                         </label>
                     </div>
+
+                    <div  ng-if="activeObject.hasOwnProperty('text')">
+
+                        <div class="group">
+                            <label>Editar Texto</label>
+                            <input type="text" ng-model="activeObject.text" class="form-control" ng-change="activeObject.text = (activeObject.text | uppercase); canvas.renderAll()">
+                        </div>
+                        <div class="group">
+                            <label>Cor do Texto</label>
+                            <color-picker ng-model="activeObject.fill" options="{inputClass: 'form-control'}"></color-picker>
+                        </div>
+                        <div class="group">
+                            <label>Cor da Borda</label>
+                            <color-picker ng-model="activeObject.stroke" options="{inputClass: 'form-control'}"></color-picker>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="help-block" ng-if="activeObject">
@@ -137,6 +157,16 @@
                                <i class="fa fa-link"></i>
                             </a>
                         </span>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <label>Selecionar um recorte</label>
+                    <div class="clear group">
+                        <span ng-repeat="c in cutouts">
+                            <a ng-click="addImage(c.url, 0.5)" ng-style="c.style" href="#" class="water-mark" ></a>
+                        </span>
+
                     </div>
                 </div>
             </div>

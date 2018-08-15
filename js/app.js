@@ -1,6 +1,6 @@
-angular.module('app', ['ngFileUpload'])
+angular.module('app', ['ngFileUpload', 'color.picker'])
 
-.controller("AppController", function ($scope, $cbmWaterMarks, $cbmSources, $window, $http) {
+.controller("AppController", function ($scope, $cbmWaterMarks, $cbmSources, $cbmCutouts, $window, $http) {
 
 
     $scope.MAX_WIDTH = 700;
@@ -15,6 +15,10 @@ angular.module('app', ['ngFileUpload'])
 
     $scope.source = null;
     $scope.sources = $cbmSources;
+
+    $scope.cutouts = $cbmCutouts;
+
+
 
     var canvas = $scope.canvas = new fabric.Canvas('canvas', {preserveObjectStacking: true});
 
@@ -87,24 +91,31 @@ angular.module('app', ['ngFileUpload'])
             stroke: "#222",
             fontSize: 55,
             fontFamily: 'impact',
-            width: 300
+            width: 300,
+            editable: true,
         });
 
         setTimeout(function () {
             canvas.add(textbox);
-        },10);
+        }, 200);
 
     };
 
-    $scope.addImage = function (url) {
+    $scope.addImage = function (url, scale) {
 
         return fabric.Image.fromURL(url, function (image) {
+
+            if (isFinite(scale))
+            {
+                image.scale(scale);
+            }
 
             if (image.width > canvas.width) {
                 image.scale(canvas.width / image.width)
             }
 
             canvas.add(image);
+
         }, {crossOrigin:'Anonymous'});
     }
 
@@ -234,8 +245,22 @@ angular.module('app', ['ngFileUpload'])
     .service('$cbmWaterMarks', function () {
         
         var list = [
-            'original', 'une', 'mst', 'psol', 'cunha'
+            'original',
+            '51',
+            'ancap',
+            'cunha',
+            'cunha-miguxos',
+            'cut',
+            'mbl',
+            'mdb',
+            'mst',
+            'petrobras',
+            'psol',
+            'tucano',
+            'une',
         ];
+
+        
         
         return list.map(function (item) { 
             
@@ -253,10 +278,15 @@ angular.module('app', ['ngFileUpload'])
 .service('$cbmSources', function () {
 
     var list = [
+        'mas', 'scooby-doo',
         'dois-botoes', 'marido-infiel', 'bolso-peixe', 'bolso-tiro',
         'drake', 'ave-temer', 'lula-molusco', 'nivel-de-gado', 'boxe-temer',
         'spider-man', 'reuniao', 'lendo-livro', 'cachorro-nao-morde',
-        'que-tipo', 'dois-botoes-esquerda', 'boa-ideia',
+        'que-tipo', 
+        'dois-botoes-esquerda', 
+        'boa-ideia',
+        'gaivota-do-mal',
+        'zeca-pagodinho',
     ];
     return list.map(function (item) {
 
@@ -269,5 +299,27 @@ angular.module('app', ['ngFileUpload'])
             }
         };
     });
-
 })
+
+.service('$cbmCutouts', function () {
+
+    var list = [
+        'placa-direita', 'placa-esquerda',
+        'certo', 'errado', 'oculos-opressor',
+        'boi-chifrudo', 'boi-mais-chifrudo',
+        'comunismo',
+        'minion-face',
+    ];
+
+    return list.map(function (item) {
+
+        var url = 'img/recortes/' + item + '.png';
+
+        return {
+            url: url,
+            style: {
+                backgroundImage: 'url("$")'.replace('$', url)
+            }
+        };
+    })
+});
