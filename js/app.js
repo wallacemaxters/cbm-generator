@@ -3,8 +3,11 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
 .controller("AppController", function ($scope, $cbmWaterMarks, $cbmSources, $cbmCutouts, $window, $http) {
 
 
-    $scope.MAX_WIDTH = 700;
-    $scope.MAX_HEIGHT = 500;
+    var canvas = $scope.canvas = new fabric.Canvas('canvas', {preserveObjectStacking: true});
+
+    var editorContainer = angular.element(document.querySelector('#editor-container'));
+
+    $scope.ratio = 0.75;
     
     $scope.activeObject = null;
     
@@ -18,9 +21,6 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
 
     $scope.cutouts = $cbmCutouts;
 
-
-
-    var canvas = $scope.canvas = new fabric.Canvas('canvas', {preserveObjectStacking: true});
 
     canvas.setBackgroundColor('#fefefe');
 
@@ -157,7 +157,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
 
         fabric.Image.fromURL(source.url, function (image) {
             
-            var width = Math.min($window.innerWidth || $window.screen.width, image.width, $scope.MAX_WIDTH) - 50;
+            var width = Math.min($window.innerWidth || $window.screen.width, image.width, editorContainer.prop('clientWidth')) - 50;
 
             image.scaleToWidth(width);
 
@@ -170,6 +170,9 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
 
             $scope.source = image;
 
+            image.lockMovementX = true;
+            image.lockMovementY = true;
+
             canvas.renderAll();
 
             $scope.$applyAsync();
@@ -177,12 +180,10 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         }, {crossOrigin:'Anonymous'});
     };
 
-
-
-    $scope.ajustCanvasToSource = function (width)
+    $scope.adjustCanvasToSource = function (width)
     {
 
-        var width = width || Math.min($window.innerWidth || $window.screen.width, $scope.MAX_WIDTH) - 50;
+        var width = width || Math.min($window.innerWidth || $window.screen.width, editorContainer.prop('clientWidth')) - 50;
        
         canvas.setWidth(width);
         $scope.source.scaleToWidth(width);
@@ -191,28 +192,41 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         $scope.$applyAsync();
     };
 
-    $scope.resizeCanvas = function () {
-        
-        if ($window.innerWidth > 768) return;
-        
-        var width = Math.min($window.innerWidth || screen.width, $scope.MAX_WIDTH) - 50;
-        
-        var height = Math.min((canvas.height/canvas.width) * width, $scope.MAX_HEIGHT);
-        
-        if ($scope.source)
-        {
-            $scope.ajustCanvasToSource();
-        }
-        else
-        {
-            canvas.setWidth(width);    
-            canvas.setHeight(height);
-        }
-        
-        canvas.centerObject($scope.waterMark.object)
+    $scope.sendObjectToBottom = function () {
+
+        if (! $scope.source) return;
+
+        $scope.activeObject.scaleToWidth($scope.source.getScaledWidth());
+
+        canvas.setHeight($scope.source.getScaledHeight() + $scope.activeObject.getScaledHeight());
+
+        $scope.source.top = 0;
+        $scope.activeObject.top = $scope.source.getScaledHeight(); 
+
+        canvas.renderAll();
     };
-    
+
+    $scope.sendObjectToTop = function () {
+
+        if (! $scope.source) return;
+
+        $scope.activeObject.scaleToWidth($scope.source.getScaledWidth());
+
+        canvas.setHeight($scope.source.getScaledHeight() + $scope.activeObject.getScaledHeight());
+
+        $scope.source.top = $scope.activeObject.getScaledHeight();
+        $scope.activeObject.top = 0;; 
+
+        canvas.renderAll();
+    };
+
+    $scope.aspectRatio = function () {
+        canvas.setWidth(editorContainer.prop('clientWidth'));
+        canvas.setHeight(Math.round(canvas.width * 0.75));
+    };
+
     $scope.selectWaterMark(0);
+    $scope.aspectRatio();
 
     angular.element($window).on('keydown', function (e) {
         
@@ -236,9 +250,8 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
                 
                 object.isWaterMark || canvas.remove(object);
             }
-            
+  
         })
-        .on('resize load', $scope.resizeCanvas)
         
     })
     
@@ -278,15 +291,27 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
 .service('$cbmSources', function () {
 
     var list = [
-        'mas', 'scooby-doo',
-        'dois-botoes', 'marido-infiel', 'bolso-peixe', 'bolso-tiro',
-        'drake', 'ave-temer', 'lula-molusco', 'nivel-de-gado', 'boxe-temer',
-        'spider-man', 'reuniao', 'lendo-livro', 'cachorro-nao-morde',
+        'mas',
+        'scooby-doo',
+        'dois-botoes', 
+        'marido-infiel', 
+        'bolso-peixe', 
+        'bolso-tiro',
+        'drake', 
+        'ave-temer', 
+        'lula-molusco', 
+        'nivel-de-gado', 
+        'boxe-temer',
+        'spider-man', 
+        'reuniao', 
+        'lendo-livro',
+        'cachorro-nao-morde',
         'que-tipo', 
         'dois-botoes-esquerda', 
         'boa-ideia',
         'gaivota-do-mal',
         'zeca-pagodinho',
+        'represa'
     ];
     return list.map(function (item) {
 
