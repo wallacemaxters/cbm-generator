@@ -311,7 +311,10 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'boa-ideia',
         'gaivota-do-mal',
         'zeca-pagodinho',
-        'represa'
+        'represa',
+        'troy-bolton',
+        'nao-renunciarei',
+        'cola'
     ];
     return list.map(function (item) {
 
@@ -334,6 +337,8 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'boi-chifrudo', 'boi-mais-chifrudo',
         'comunismo',
         'minion-face',
+        'cabelo-mulher-1',
+        'cabelo-mulher-2'
     ];
 
     return list.map(function (item) {
