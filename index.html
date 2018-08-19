@@ -127,7 +127,7 @@
                     <button title="Posicionar imagem abaixo" 
                             class="btn" 
                             ng-click="sendObjectToBottom()"
-                            ng-if="source && activeObject !== source && !activeObject.isWaterMark && activeObject.get('type') === 'image'">
+                            ng-if="source && activeObject !== source && !activeObject.isWaterMark">
                         <i class="fa fa-arrow-down"></i>
                     </button>
 
@@ -135,7 +135,7 @@
                             title="Posicionar imagem acima"
                             class="btn" 
                             ng-click="sendObjectToTop()"
-                            ng-if="source && activeObject !== source && !activeObject.isWaterMark && activeObject.get('type') === 'image'">
+                            ng-if="source && activeObject !== source && !activeObject.isWaterMark">
                         <i class="fa fa-arrow-up"></i>
                     </button>
 

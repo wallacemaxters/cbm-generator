@@ -314,7 +314,8 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'represa',
         'troy-bolton',
         'nao-renunciarei',
-        'cola'
+        'cola',
+        'rick-e-carl',
     ];
     return list.map(function (item) {
 
