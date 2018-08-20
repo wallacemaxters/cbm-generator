@@ -285,43 +285,63 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
                     backgroundImage: 'url("$")'.replace('$', url)
             }
         };
-    })
+    })  
 })
 
 .service('$cbmSources', function () {
 
     var list = [
-        'mas',
-        'scooby-doo',
-        'dois-botoes', 
-        'marido-infiel', 
-        'bolso-peixe', 
-        'bolso-tiro',
-        'drake', 
-        'ave-temer', 
-        'lula-molusco', 
-        'nivel-de-gado', 
-        'boxe-temer',
-        'spider-man', 
-        'reuniao', 
-        'lendo-livro',
-        'cachorro-nao-morde',
-        'que-tipo', 
-        'dois-botoes-esquerda', 
+        'ave-temer',
+        'bicicleta',
+        'bicicleta-real',
         'boa-ideia',
-        'gaivota-do-mal',
-        'zeca-pagodinho',
-        'represa',
-        'troy-bolton',
-        'nao-renunciarei',
+        'bob-esponja-fila',
+        'bolso-peixe',
+        'bolso-tiro',
+        'boxe-temer',
+        'cachorro-nao-morde',
+        'change-my-mind',
         'cola',
+        'deve-estar-traindo',
+        'dois-botoes-esquerda',
+        'dois-botoes',
+        'drake',
+        'drift',
+        'estrela-cadente',
+        'faustao',
+        'gaivota-do-mal',
+        'gaivota-pistola',
+        'lendo-livro',
+        'lula-molusco',
+        'karnal',
+        'marido-infiel',
+        'mas',
+        'nao-renunciarei',
+        'nivel-de-gado',
+        'passaros',
+        'pergaminho',
+        'pica-pau-femea',
+        'que-tipo',
+        'represa',
+        'reuniao',
         'rick-e-carl',
+        'scooby-doo',
+        'senhora',
+        'spider-man',
+        'the-rock',
+        'tiro',
+        'tom',
+        'troy-bolton',
+        'trump',
+        'wolverine',
+        'zeca-pagodinho',
     ];
     return list.map(function (item) {
 
         var url = 'img/sources/' + item + '.jpg';
 
         return {
+            name: item,
             url: url,
             style: {
                 backgroundImage: 'url("$")'.replace('$', url)

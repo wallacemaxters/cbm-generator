@@ -169,8 +169,8 @@
                 <div class="group">
                     <label>Selecione um Source</label>
                     <div class="clear group">
-                        <span ng-repeat="s in sources">
-                            <a ng-click="addSource(s)" ng-style="s.style" href="#" class="water-mark" ></a>
+                        <span ng-repeat="s in sources" ng-attr-title="{{ ::s.name }}">
+                            <a ng-click="addSource(s)" ng-style="::s.style" href="#" class="water-mark" ></a>
                         </span>
 
                         <span>
