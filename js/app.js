@@ -296,6 +296,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'bicicleta-real',
         'boa-ideia',
         'bob-esponja-fila',
+        'bolso-chute',
         'bolso-peixe',
         'bolso-tiro',
         'boxe-temer',
@@ -314,6 +315,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'lendo-livro',
         'lula-molusco',
         'karnal',
+        'kim-trump',
         'marido-infiel',
         'mas',
         'nao-renunciarei',
@@ -359,7 +361,17 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'comunismo',
         'minion-face',
         'cabelo-mulher-1',
-        'cabelo-mulher-2'
+        'cabelo-mulher-2',
+        'glow-eye',
+        'brasil',
+        'chifre',
+        'chapeu-comunista',
+        'angry',
+        'sad',
+        'uau',
+        'love', 
+        'like',
+        'bolsonaro-chutando'
     ];
 
     return list.map(function (item) {

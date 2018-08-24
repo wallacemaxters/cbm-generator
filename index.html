@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CBM Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    
     <link rel="stylesheet" href="css/ui-cropper.css">
     <link rel="stylesheet" href="css/flexboxgrid.min.css">
     <link rel="stylesheet" href="css/angularjs-color-picker.min.css">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <script src="js/tinycolor-min.js"></script>
     <script src="js/angular.min.js"></script>
     <script src="js/ng-file-upload-all.min.js"></script>
@@ -19,194 +18,159 @@
     <script src="js/fabric.min.js"></script>
     <script src="js/app.js?t=2018-08-08T01:31:38.709Z" defer></script>
 </head>
+
 <body ng-app="app">
     <div class="container" ng-controller="AppController">
         <h1 class="text-center">CBM Generator</h1>
         <div class="row">
-
-           <div class="col-xs-12 col-sm-4">
-            <div ng-if="activeObject" style="padding: 10px; background-color: #fff">
-                <div>
-                    <h4>Efeitos do Objeto</h4>
-                    <div class="group" >
-                        <label>Opacidade</label>
-                        <input type="number" min="0.1" max="1" step="0.05" ng-model="activeObject.opacity" class="form-control" ng-change="canvas.renderAll()">
-                    </div>
-
-                    <div class="group">
-                        <label>
-                            <input type="checkbox" ng-model="activeObject.flipX" ng-change="canvas.renderAll()">
-                            Espelho Horizontal
-                        </label>
-                    </div>
-
-                    <div class="group">
-                        <label>
-                            <input type="checkbox" ng-model="activeObject.flipY" ng-change="canvas.renderAll()">
-                            Espelho Vertical
-                        </label>
-                    </div>
-
-                    <div class="group">
-                        <label>Ângulo</label>
-                        <input type="number" min="0" max="360" ng-model="activeObject.angle" ng-change="canvas.renderAll()" class='form-control'>
-                    </div>
-
-
-                    <div class="group">
-                        <label>
-                            <input type="checkbox" ng-model="activeObject.lockMovementX">
-                            Bloquear movimento horizontal
-                        </label>
-                    </div>
-                    <div class="group">
-                        <label>
-                            <input type="checkbox" ng-model="activeObject.lockMovementY">
-                            Bloqueiar Movimento Vertical
-                        </label>
-                    </div>
-                    <div class="group">
-                        <label>
-                            <input type="checkbox" ng-model="activeObject.selectable">
-                            Ativar Seleção do Objeto
-                        </label>
-                    </div>
-
-                    <div  ng-if="activeObject.get('type') === 'textbox'">
-
+            <div class="col-xs-12 col-sm-4">
+                <div ng-if="activeObject" style="padding: 10px; background-color: #fff">
+                    <div>
+                        <h4>Efeitos do Objeto</h4>
                         <div class="group">
-                            <label>Editar Texto</label>
-                            <input type="text" ng-model="activeObject.text" class="form-control" ng-change="activeObject.text = (activeObject.text | uppercase); canvas.renderAll()">
+                            <label>Opacidade</label>
+                            <input type="number" min="0.1" max="1" step="0.05" ng-model="activeObject.opacity" class="form-control" ng-change="canvas.renderAll()">
                         </div>
                         <div class="group">
-                            <label>Cor do Texto</label>
-                            <color-picker ng-model="activeObject.fill" options="{inputClass: 'form-control'}"></color-picker>
+                            <label>
+                                <input type="checkbox" ng-model="activeObject.flipX" ng-change="canvas.renderAll()"> Espelho Horizontal
+                            </label>
                         </div>
                         <div class="group">
-                            <label>Cor da Borda</label>
-                            <color-picker ng-model="activeObject.stroke" options="{inputClass: 'form-control'}"></color-picker>
+                            <label>
+                                <input type="checkbox" ng-model="activeObject.flipY" ng-change="canvas.renderAll()"> Espelho Vertical
+                            </label>
+                        </div>
+                        <div class="group">
+                            <label>Ângulo</label>
+                            <input type="number" min="0" max="360" ng-model="activeObject.angle" ng-change="canvas.renderAll()" class='form-control'>
+                        </div>
+                        <div class="group">
+                            <label>
+                                <input type="checkbox" ng-model="activeObject.lockMovementX"> Bloquear movimento horizontal
+                            </label>
+                        </div>
+                        <div class="group">
+                            <label>
+                                <input type="checkbox" ng-model="activeObject.lockMovementY"> Bloqueiar Movimento Vertical
+                            </label>
+                        </div>
+                        <div class="group">
+                            <label>
+                                <input type="checkbox" ng-model="activeObject.selectable"> Ativar Seleção do Objeto
+                            </label>
+                        </div>
+                        <div ng-if="activeObject.get('type') === 'textbox'">
+                            <div class="group">
+                                <label>Editar Texto</label>
+                                <input type="text" ng-model="activeObject.text" class="form-control" ng-change="activeObject.text = (activeObject.text | uppercase); canvas.renderAll()">
+                            </div>
+                            <div class="group">
+                                <label>Cor do Texto</label>
+                                <color-picker ng-model="activeObject.fill" options="{inputClass: 'form-control'}"></color-picker>
+                            </div>
+                            <div class="group">
+                                <label>Cor da Borda</label>
+                                <color-picker ng-model="activeObject.stroke" options="{inputClass: 'form-control'}"></color-picker>
+                            </div>
                         </div>
                     </div>
-
+                    <div class="help-block" ng-if="activeObject">
+                        <strong>Teclas</strong>
+                        <br>
+                        <kbd>HOME</kbd> ou
+                        <kbd>+</kbd> para mover o objeto para uma camada acima
+                        <br>
+                        <kbd>END</kbd> ou
+                        <kbd>-</kbd> para movê-lo uma camada abaixo
+                        <br>
+                        <kbd>CTRL+DELETE</kbd> para remover
+                    </div>
                 </div>
 
-                <div class="help-block" ng-if="activeObject">
-                    <strong>Teclas</strong><br>
-                    <kbd>HOME</kbd> ou <kbd>+</kbd> para mover o objeto para uma camada acima <br>
-                    <kbd>END</kbd> ou <kbd>-</kbd> para movê-lo uma camada abaixo<br>
-                    <kbd>CTRL+DELETE</kbd> para remover
-                </div>
-
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-8" id="editor-container">
-
-            <div class="image-editor clear">
-                <div class="group">
-                    <button type="file" ngf-drop ngf-select ngf-change="addImageFromBlob($file)" ngf-accept="'image/*'" class="btn btn-primary" title="Adicionar Imagem do computador">
-                        <i class="fa fa-image fa-fw"></i>
-                    </button>
-                    <button type="file" ng-click="addFromUrl()" class="btn btn-primary" title="Adicionar Imagem por um link">
-                        <i class="fa fa-link fa-fw"></i>
-                    </button>
-                    <button ng-click="addText()" class="btn" title="Adicionar Texto">
-                        <i class="fa fa-font fa-fw"></i>
-                    </button>
-                    <button class="btn" ng-click="canvas.centerObject(activeObject)" ng-if="activeObject" title="Centralizar">
-                        <i class="fa fa-align-center fa-fw"></i>
-                    </button>
-
-                    <button 
-                        class="btn btn-danger" 
-                        ng-click="removeObject(activeObject)" 
-                        ng-if="activeObject && !activeObject.isWaterMark" 
-                            title="Remover Objeto">
-                        <i class="fa fa-trash fa-fw"></i>
-                    </button>
-
-                    <button title="Posicionar imagem abaixo" 
-                            class="btn" 
-                            ng-click="sendObjectToBottom()"
-                            ng-if="source && activeObject !== source && !activeObject.isWaterMark">
-                        <i class="fa fa-arrow-down"></i>
-                    </button>
-
-                    <button 
-                            title="Posicionar imagem acima"
-                            class="btn" 
-                            ng-click="sendObjectToTop()"
-                            ng-if="source && activeObject !== source && !activeObject.isWaterMark">
-                        <i class="fa fa-arrow-up"></i>
-                    </button>
-
-                    <a ng-click="render()" 
-                        class="btn btn-success" 
-                        download="cbm-meme.jpg" 
-                        target="_blank"
-                        ng-href="{{image.result}}"
-                        title="Baixar Imagem">
-                        <i class="fa fa-download fa-fw"></i>
-                    </a>
-                    
-                </div>
+                <!-- AD SENSE -->
                 
-
-                <div class="group" 
-                    ngf-drop  
-                    ngf-change="source ? addImageFromBlob($file) : addSourceFromBlob($file)">
-                    <canvas height="500" width="700" id="canvas" class="cbm-canvas"></canvas>
-                </div>
-
-                <div class="group">
-                    <label>Selecione um Selo</label>
-                    <div class="clear group">
-                        <span ng-repeat="w in waterMarks">
-                            <a ng-click="selectWaterMark($index)" ng-style="w.style" class="water-mark" ng-class="{active: w === waterMark}"></a>
-                        </span>
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- CBM Generator -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-4119206527475379"
+                    data-ad-slot="4015700976"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+            <div class="col-xs-12 col-sm-8" id="editor-container">
+                <div class="image-editor clear">
+                    <div class="group">
+                        <button type="file" ngf-drop ngf-select ngf-change="addImageFromBlob($file)" ngf-accept="'image/*'" class="btn btn-primary"
+                            title="Adicionar Imagem do computador">
+                            <i class="fa fa-image fa-fw"></i>
+                        </button>
+                        <button type="file" ng-click="addFromUrl()" class="btn btn-primary" title="Adicionar Imagem por um link">
+                            <i class="fa fa-link fa-fw"></i>
+                        </button>
+                        <button ng-click="addText()" class="btn" title="Adicionar Texto">
+                            <i class="fa fa-font fa-fw"></i>
+                        </button>
+                        <button class="btn" ng-click="canvas.centerObject(activeObject)" ng-if="activeObject" title="Centralizar">
+                            <i class="fa fa-align-center fa-fw"></i>
+                        </button>
+                        <button class="btn btn-danger" ng-click="removeObject(activeObject)" ng-if="activeObject && !activeObject.isWaterMark" title="Remover Objeto">
+                            <i class="fa fa-trash fa-fw"></i>
+                        </button>
+                        <button title="Posicionar imagem abaixo" class="btn" ng-click="sendObjectToBottom()" ng-if="source && activeObject !== source && !activeObject.isWaterMark">
+                            <i class="fa fa-arrow-down"></i>
+                        </button>
+                        <button title="Posicionar imagem acima" class="btn" ng-click="sendObjectToTop()" ng-if="source && activeObject !== source && !activeObject.isWaterMark">
+                            <i class="fa fa-arrow-up"></i>
+                        </button>
+                        <a ng-click="render()" class="btn btn-success" download="cbm-meme.jpg" target="_blank" ng-href="{{image.result}}" title="Baixar Imagem">
+                            <i class="fa fa-download fa-fw"></i>
+                        </a>
                     </div>
-                </div>
-
-                <div class="group">
-                    <label>Selecione um Source</label>
-                    <div class="clear group">
-                        <span ng-repeat="s in sources" ng-attr-title="{{ ::s.name }}">
-                            <a ng-click="addSource(s)" ng-style="::s.style" href="#" class="water-mark" ></a>
-                        </span>
-
-                        <span>
-                            <a title="Adicionar source do computador" 
-                                ngf-accept="'image/*'" 
-                                ngf-drop 
-                                ngf-select 
-                                ngf-change="addSourceFromBlob($file)"
-                                class="water-mark icon">
-                               <i class="fa fa-plus"></i>
-                            </a>
-                        </span>
-                        <span>
-                            <a title="Adicionar source por link" ng-click="addSourceFromUrl($file)" class="water-mark icon">
-                               <i class="fa fa-link"></i>
-                            </a>
-                        </span>
+                    <div class="group" ngf-drop ngf-change="source ? addImageFromBlob($file) : addSourceFromBlob($file)">
+                        <canvas height="500" width="700" id="canvas" class="cbm-canvas"></canvas>
                     </div>
-                </div>
-
-                <div class="group">
-                    <label>Selecionar um recorte</label>
-                    <div class="clear group">
-                        <span ng-repeat="c in cutouts">
-                            <a ng-click="addImage(c.url, 0.5)" ng-style="c.style" href="#" class="water-mark" ></a>
-                        </span>
-
+                    <div class="group">
+                        <label>Selecione um Selo</label>
+                        <div class="clear group">
+                            <span ng-repeat="w in waterMarks">
+                                <a ng-click="selectWaterMark($index)" ng-style="w.style" class="water-mark" ng-class="{active: w === waterMark}"></a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <label>Selecione um Source</label>
+                        <div class="clear group">
+                            <span ng-repeat="s in sources" ng-attr-title="{{ ::s.name }}">
+                                <a ng-click="addSource(s)" ng-style="::s.style" href="#" class="water-mark"></a>
+                            </span>
+                            <span>
+                                <a title="Adicionar source do computador" ngf-accept="'image/*'" ngf-drop ngf-select ngf-change="addSourceFromBlob($file)"
+                                    class="water-mark icon">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </span>
+                            <span>
+                                <a title="Adicionar source por link" ng-click="addSourceFromUrl($file)" class="water-mark icon">
+                                    <i class="fa fa-link"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <label>Selecionar um recorte</label>
+                        <div class="clear group">
+                            <span ng-repeat="c in cutouts">
+                                <a ng-click="addImage(c.url, 0.5)" ng-style="c.style" href="#" class="water-mark"></a>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        
-
     </div>
-
-</div>
 </body>
+
 </html>
