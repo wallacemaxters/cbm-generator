@@ -180,8 +180,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         }, {crossOrigin:'Anonymous'});
     };
 
-    $scope.adjustCanvasToSource = function (width)
-    {
+    $scope.adjustCanvasToSource = function (width) {
 
         var width = width || Math.min($window.innerWidth || $window.screen.width, editorContainer.prop('clientWidth')) - 50;
        
@@ -224,6 +223,19 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         canvas.setWidth(editorContainer.prop('clientWidth'));
         canvas.setHeight(Math.round(canvas.width * 0.75));
     };
+
+    $scope.cloneObject = function () {
+        
+        var obj = fabric.util.object.clone(canvas.getActiveObject());
+
+        delete obj.isWaterMark;
+        
+        obj.set("top", obj.top + 5);
+
+        obj.set("left", obj.left + 5);
+
+        canvas.add(obj);
+    }
 
     $scope.selectWaterMark(0);
     $scope.aspectRatio();

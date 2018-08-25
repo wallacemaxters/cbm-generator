@@ -13,14 +13,26 @@
 body{
     margin: 0;
     padding: 0;
-    font-family: Roboto, Tahoma, sans-serif;
+    font-family: Helvetica, sans-serif;
     line-height: 1.3;
     background-color: #f1f1f1;
 }
 
 h1{
-    font-size: 40px;
-    margin: 10px 0;
+    font-size: 3rem;
+    padding: 10px 0;
+}
+
+h2{
+    font-size: 2.5rem;
+}
+
+h3{
+    font-size: 2rem;
+}
+
+h4{
+    font-size: 1.2rem;
 }
 
 .clear::after, .clear::before{
@@ -133,8 +145,12 @@ h1{
     border: 1px solid #039;
 }
 
-.btn.btn-danger
-{
+.btn.btn-info{
+    background-color: lightblue;
+    color: #333;
+}
+
+.btn.btn-danger {
     background-color: #B00;
     color: white;
 }
@@ -167,6 +183,7 @@ label{
     background-color: #fff;
     border-radius: 4px;
     outline: none;
+    font-family: inherit;
 }
 
 @media screen and (max-width: 800px) {
@@ -176,3 +193,9 @@ label{
     }
 }
 
+
+
+.header{
+    background-color: #222;
+    color: #fff;
+}
