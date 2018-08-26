@@ -78,26 +78,32 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         if (activeObject.name === 'waterMark') return;
 
         canvas.remove(activeObject);
+        
+        if ($scope.source === activeObject) {
+            $scope.source = null;
+        }
     };
 
 
     $scope.addText = function () {
 
-        var textbox = new fabric.Textbox('DIGITE O TEXTO', {
+        var textbox = new fabric.Textbox('TEXTO', {
             left: 100,
             top: 0,
             fill: '#fff',
             strokeWidth: 3,
             stroke: "#222",
-            fontSize: 55,
+            fontSize: 45,
             fontFamily: 'impact',
             width: 300,
             editable: true,
         });
 
-        setTimeout(function () {
-            canvas.add(textbox);
-        }, 200);
+
+        canvas.add(textbox);
+        canvas.setActiveObject(textbox);
+        $scope.activeObject = textbox;
+
 
     };
 
@@ -113,6 +119,8 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
             if (image.width > canvas.width) {
                 image.scale(canvas.width / image.width)
             }
+
+            image.set({centeredRotation: true});
 
             canvas.add(image);
 
@@ -167,6 +175,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
             canvas.setHeight(image.getScaledHeight());
 
             $scope.waterMark.object.moveTo(canvas.getObjects().length);
+            canvas.centerObject($scope.waterMark.object);
 
             $scope.source = image;
 
@@ -219,6 +228,11 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         canvas.renderAll();
     };
 
+    $scope.set = function (key, value) {
+        $scope.activeObject.set(key, value);
+        canvas.renderAll();
+    };
+
     $scope.aspectRatio = function () {
         canvas.setWidth(editorContainer.prop('clientWidth'));
         canvas.setHeight(Math.round(canvas.width * 0.75));
@@ -230,12 +244,25 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
 
         delete obj.isWaterMark;
         
-        obj.set("top", obj.top + 5);
-
-        obj.set("left", obj.left + 5);
+        obj.set({
+            top: obj.top + 10,
+            left: obj.left + 10,
+            lockMovementX: false,
+            lockMovementY: false,
+        });
 
         canvas.add(obj);
-    }
+    };
+
+    $scope.reset = function () {
+
+        angular.forEach(canvas.getObjects(), function (obj) {
+            canvas.remove(obj)
+        })
+
+        $scope.source = null;
+
+    };
 
     $scope.selectWaterMark(0);
     $scope.aspectRatio();
@@ -244,7 +271,6 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         
         var object = canvas.getActiveObject(),
             currentIndex = canvas.getObjects().indexOf(object);
-            
             
             if ([36, 107].indexOf(e.keyCode) >= 0 && object) {
 
@@ -259,8 +285,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
                 object.moveTo(Math.max(0, currentIndex - 1));
                 
             } else if (e.keyCode === 46 && e.ctrlKey) {
-                
-                object.isWaterMark || canvas.remove(object);
+                $scope.removeObject(object);
             }
   
         })
@@ -330,6 +355,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'kim-trump',
         'marido-infiel',
         'mas',
+        'mcmahon-react',
         'nao-renunciarei',
         'nivel-de-gado',
         'passaros',
@@ -345,6 +371,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'the-rock',
         'tiro',
         'tom',
+        'troll-vs-normies',
         'troy-bolton',
         'trump',
         'wolverine',

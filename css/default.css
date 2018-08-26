@@ -94,6 +94,10 @@ h4{
     transform: scale(1.5);
 }
 
+.water-mark.hover-big:hover{
+    transform: scale(2);
+}
+
 .water-mark.active{
     border-color: #049;
 }
@@ -128,7 +132,7 @@ h4{
     background-color: #f1f1f1;
     border: none;
     padding: 10px 15px;
-    font-family: Roboto, Tahoma, sans-serif;
+    font-family: inherit;
     font-weight: bold;
     border-radius: 4px;
     border: 1px solid #ccc;
@@ -146,8 +150,8 @@ h4{
 }
 
 .btn.btn-info{
-    background-color: lightblue;
-    color: #333;
+    background-color: steelblue;
+    color: #fff;
 }
 
 .btn.btn-danger {
@@ -165,6 +169,10 @@ h4{
     transform: translateY(2px);
 }
 
+.btn.btn-block{
+    width: 100%;
+    display: block;
+}
 
 label{
     font-weight: bold;
@@ -190,6 +198,14 @@ label{
 
     .container{
         padding: 0 15px;
+    }
+
+    .hide-mobile{
+        display: none;
+    }
+
+    .btn > span{
+        display: none;
     }
 }
 
