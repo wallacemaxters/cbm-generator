@@ -175,9 +175,12 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
             canvas.setHeight(image.getScaledHeight());
 
             $scope.waterMark.object.moveTo(canvas.getObjects().length);
+
             canvas.centerObject($scope.waterMark.object);
 
-            $scope.source = image;
+            canvas.setActiveObject(image);
+
+            $scope.activeObject = $scope.source = image;
 
             image.lockMovementX = true;
             image.lockMovementY = true;
@@ -337,6 +340,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'bolso-peixe',
         'bolso-tiro',
         'boxe-temer',
+        'buzz-olha',   
         'cachorro-nao-morde',
         'change-my-mind',
         'cola',
@@ -349,9 +353,11 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'faustao',
         'gaivota-do-mal',
         'gaivota-pistola',
+        'homer-escondendo',
         'lendo-livro',
         'lula-molusco',
         'karnal',
+        'kermit-carro',
         'kim-trump',
         'marido-infiel',
         'mas',
@@ -361,6 +367,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'passaros',
         'pergaminho',
         'pica-pau-femea',
+        'pica-pau-fui-tapeado',
         'que-tipo',
         'represa',
         'reuniao',
@@ -371,6 +378,10 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'the-rock',
         'tiro',
         'tom',
+        'tom-ladrao',
+        'tom-policia',
+        'tom-jerry-gigante',
+        'tom-capangas',
         'troll-vs-normies',
         'troy-bolton',
         'trump',
@@ -410,7 +421,9 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'uau',
         'love', 
         'like',
-        'bolsonaro-chutando'
+        'bolsonaro-chutando',
+        'bone-novo',
+        'cruzada'
     ];
 
     return list.map(function (item) {
