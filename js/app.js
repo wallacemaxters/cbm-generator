@@ -423,7 +423,8 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'like',
         'bolsonaro-chutando',
         'bone-novo',
-        'cruzada'
+        'cruzada', 
+        'feminismo'
     ];
 
     return list.map(function (item) {
