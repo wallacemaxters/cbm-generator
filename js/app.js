@@ -345,7 +345,6 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'change-my-mind',
         'cola',
         'deve-estar-traindo',
-        'dois-botoes-esquerda',
         'dois-botoes',
         'drake',
         'drift',
@@ -359,6 +358,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'karnal',
         'kermit-carro',
         'kim-trump',
+        'kogos-inditoso-esquerdista',
         'marido-infiel',
         'mas',
         'mcmahon-react',
@@ -384,7 +384,6 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'tom-capangas',
         'troll-vs-normies',
         'troy-bolton',
-        'trump',
         'wolverine',
         'zeca-pagodinho',
     ];
@@ -405,6 +404,8 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
 .service('$cbmCutouts', function () {
 
     var list = [
+        'ancap',
+        'ancap-2',
         'placa-direita', 'placa-esquerda',
         'certo', 'errado', 'oculos-opressor',
         'boi-chifrudo', 'boi-mais-chifrudo',
@@ -412,10 +413,12 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'minion-face',
         'cabelo-mulher-1',
         'cabelo-mulher-2',
+        'cabelo-mulher-3',
         'glow-eye',
         'brasil',
         'chifre',
         'chapeu-comunista',
+        'dalai-lama-surpreso',
         'angry',
         'sad',
         'uau',
@@ -423,8 +426,14 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'like',
         'bolsonaro-chutando',
         'bone-novo',
-        'cruzada', 
-        'feminismo'
+        'cruzada-capacete', 
+        'cruzada-capacete-2',
+        'cruzada-escudo',
+        'feminismo',
+        'barba',
+        'psdb',
+        'lula',
+        'che'
     ];
 
     return list.map(function (item) {
