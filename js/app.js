@@ -331,7 +331,10 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
 .service('$cbmSources', function () {
 
     var list = [
+        'anjo-recado',
         'ave-temer',
+        'batman-react',
+        'batman-pensativo',
         'bicicleta',
         'bicicleta-real',
         'boa-ideia',
@@ -343,6 +346,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'boxe-temer',
         'buzz-olha',   
         'cachorro-nao-morde',
+        'cachorro-bravo-calmo',
         'change-my-mind',
         'cola',
         'dalai-lama-surpreso',
@@ -351,6 +355,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'drake',
         'drift',
         'estrela-cadente',
+        'evolucao-gado',
         'faustao',
         'gaivota-do-mal',
         'gaivota-pistola',
@@ -365,7 +370,6 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'mas',
         'mcmahon-react',
         'nao-renunciarei',
-        'nivel-de-gado',
         'passaros',
         'pergaminho',
         'pica-pau-femea',
@@ -420,7 +424,6 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'brasil',
         'chifre',
         'chapeu-comunista',
-
         'angry',
         'sad',
         'uau',
@@ -435,7 +438,8 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'barba',
         'psdb',
         'lula',
-        'che'
+        'che',
+        'bolsonaro'
     ];
 
     return list.map(function (item) {
