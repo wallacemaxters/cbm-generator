@@ -226,10 +226,12 @@
                         <p>Para começar, selecione um source (base) para fazer o seu meme</p>
                         <p>Clique no botão
                             <i class="fa fa-plus"> </i> para adicionar uma base do seu computador</p>
-
+                    </div>
+                    <div class="group">
+                        <input type="text" class="form-control" placeholder="Digite para pesquisar um source" ng-model="search">
                     </div>
                     <div class="clear group">
-                        <span ng-repeat="s in sources" ng-attr-title="{{ ::s.name }}">
+                        <span ng-repeat="s in sources|filter:search|limitTo:10" ng-attr-title="{{ ::s.name }}">
                             <a ng-click="addSource(s)" ng-style="::s.style" href="#" class="water-mark hover-big"></a>
                         </span>
                         <span>
