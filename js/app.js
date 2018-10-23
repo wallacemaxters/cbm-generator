@@ -88,15 +88,16 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
     $scope.addText = function () {
 
         var textbox = new fabric.Textbox('TEXTO', {
-            left: 100,
+            left: 0,
             top: 0,
-            fill: '#fff',
+            fill: '#FFD700',
             strokeWidth: 3,
-            stroke: "#222",
+            stroke: "#222222",
             fontSize: 45,
-            fontFamily: 'impact',
-            width: 300,
+            fontFamily: 'Impact',
+            width: canvas.width - (canvas.width / 4),
             editable: true,
+            textAlign: 'center'
         });
 
 
@@ -131,6 +132,8 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
 
         var url = prompt('Cole a url da imagem aqui');
 
+        if (! url) return;
+
         $scope.addImage(url);    
     };
 
@@ -145,12 +148,16 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
 
         var url = prompt('Cole a url da imagem aqui');
 
+        if (url === null) return;
+
         $scope.addSource({
             url: url
         });
     };
 
     $scope.addSourceFromBlob = function ($file) {
+
+        if  ($file === null) return;
 
         $scope.addSource({
             url: URL.createObjectURL($file)
@@ -416,9 +423,13 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
     var list = [
         'ancap',
         'ancap-2',
-        'placa-direita', 'placa-esquerda',
-        'certo', 'errado', 'oculos-opressor',
-        'boi-chifrudo', 'boi-mais-chifrudo',
+        'placa-direita', 
+        'placa-esquerda',
+        'certo', 
+        'errado', 
+        'oculos-opressor',
+        'boi-chifrudo',
+        'boi-mais-chifrudo',
         'comunismo',
         'minion-face',
         'cabelo-mulher-1',
@@ -457,4 +468,4 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
             }
         };
     })
-});
+})

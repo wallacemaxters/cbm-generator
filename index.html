@@ -146,13 +146,19 @@
                                         <div class="col-xs-12 col-sm">
                                             <div class="group">
                                                 <label>Editar Texto</label>
-                                                <input type="text" ng-model="activeObject.text" class="form-control" ng-change="activeObject.text = (activeObject.text | uppercase); canvas.renderAll()">
+                                                <input type="text" 
+                                                    ng-model="activeObject.text" 
+                                                    class="form-control" 
+                                                    ng-model-options="{debounce: 500}"
+                                                    ng-change="activeObject.text = (activeObject.text | uppercase); canvas.renderAll()">
                                             </div>
                                         </div>
                                         <div class="col-xs-6 col-sm-3">
                                             <div class="group">
                                                 <label>Cor do Texto</label>
-                                                <color-picker ng-model="activeObject.fill" options="{inputClass: 'form-control'}"></color-picker>
+                                                <color-picker 
+                                                    ng-model="activeObject.fill" 
+                                                    options="{format: 'hexString', round: true, inputClass: 'form-control'}"></color-picker>
                                             </div>
                                         </div>
                                         <div class="col-xs-6 col-sm-3">
@@ -160,7 +166,7 @@
                                                 <label>Cor da Borda</label>
                                                 <color-picker  
                                                     ng-model="activeObject.stroke" 
-                                                    options="{inputClass: 'form-control'}"></color-picker>
+                                                    options="{format: 'hexString', round: true, inputClass: 'form-control'}"></color-picker>
                                             </div>
                                         </div>
                                     </div>
