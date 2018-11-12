@@ -391,6 +391,8 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         {path: 'mcmahon-react'},
         {path: 'nao-renunciarei', name: 'Temer Presidento - Não renunciarei'},
         {path: 'npc', name: 'Meme NPC Wojak'},
+        {path: 'npc-quadrinho', name: 'Meme NPC quadrinho'},
+        {path: 'npc-grupo', name: 'Meme NPC grupo'},
         {path: 'passaros', name: 'Pássaros'},
         {path: 'pela-mamae', name: 'Bebe, papinha, pela mamãe, pelo papai'},
         {path: 'pergaminho'},
