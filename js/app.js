@@ -318,6 +318,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
             'psol',
             'tucano',
             'une',
+            'patriotica',
         ];
 
         
@@ -338,6 +339,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
 .service('$cbmSources', function () {
 
     var list = [
+        {path: 'augusto-pinochet', name: 'Augusto Pinochet'},
         {path: 'anjo-recado', name: 'Anjo entregando recado'},
         {path: 'ave-temer', name: 'Ave Temer - presidento'},
         {path: 'batman-react', name: 'Batman react'},
@@ -346,6 +348,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         {path: 'bicicleta-real', name: 'Caindo da bibicleta 4k'},
         {path: 'boa-ideia', name: 'Ideia'},
         {path: 'bob-esponja-fila', name: 'Bob Esponja fila'},
+        {path: 'bob-esponja-retardado', name: 'Bob Esponja retardado'},
         {path: 'bob-esponja-fogueira', name: 'Bob Esponja fogueira'},
         {path: 'bob-esponja-dinheiro', name: 'Bob Esponja contando dinheiro com sirigueijo'},
         {path: 'bolso-chute', name: 'Bolsonaro chutando'},
@@ -379,6 +382,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         {path: 'lula-molusco', name: 'Lula molusco - Bob Esponja'},
         {path: 'karnal', name: 'Leandro Karnal'},
         {path: 'kermit-carro'},
+        {path: 'kermit-ak-47', name: 'Kermit AK 47'},
         {path: 'kim-trump', name: 'Kim cumprimentando o Trump'},
         {path: 'kogos-inditoso-esquerdista', name: 'Paulo Kogos - Inditoso esquerdista'},
         {path: 'marido-infiel'},
@@ -470,6 +474,8 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'oculos-opressor',
         'placa-direita', 
         'placa-esquerda',
+        'pitu',
+        'pitu-2',
         'psdb',
         'sad',
         'uau',
