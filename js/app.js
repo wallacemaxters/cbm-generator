@@ -370,6 +370,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         {path: 'dois-botoes-npc', name: 'Dois Botões NPC'},
         {path: 'drake'},
         {path: 'drift'},
+        {path: 'estourando-a-bolha', name: 'Estourando a bolha'},
         {path: 'estrela-cadente'},
         {path: 'evolucao-gado'},
         {path: 'faustao'},
