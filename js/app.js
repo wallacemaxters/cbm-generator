@@ -308,9 +308,13 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
             'original',
             '51',
             'ancap',
+            'cruzeiro',
             'cunha',
             'cunha-miguxos',
             'cut',
+            'galo',
+            'chicago-bull',
+            'mario',
             'mbl',
             'mdb',
             'mst',
@@ -319,10 +323,10 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
             'tucano',
             'une',
             'patriotica',
+            'tv-cultura',
+            'pepsi'
         ];
 
-        
-        
         return list.map(function (item) { 
             
             var url = 'img/cbm-'+ item + '.png';
@@ -370,6 +374,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         {path: 'dois-botoes-npc', name: 'Dois Botões NPC'},
         {path: 'drake'},
         {path: 'drift'},
+        {path: 'equilibrista-predio-cadeira', name: 'Equilibrando em cima do prédio numa cadeira'},
         {path: 'estourando-a-bolha', name: 'Estourando a bolha'},
         {path: 'estrela-cadente'},
         {path: 'evolucao-gado'},
@@ -407,6 +412,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         {path: 'scooby-doo', name: 'Scooby Doo'},
         {path: 'senhora'},
         {path: 'spider-man', name: 'Homem Aranha - Spider man'},
+        {path: 'thanos-balanco', name: 'Thanos Balanço Perfeito'},
         {path: 'the-rock', name: 'The rock no carro'},
         {path: 'tiro', name: 'Tiro'},
         {path: 'to-feliz-e-puto', name: 'Estou feliz e puto'},
@@ -421,6 +427,13 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         {path: 'wolverine', name: 'Wolverine com saudades'},
         {path: 'zeca-pagodinho', name: 'Zeca Pagodinho - Indo embora'},
     ];
+
+
+    list.sort(function () {
+        return 0.5 - Math.random();
+    });
+
+
     return list.map(function (item) {
 
         var url = 'img/sources/' + item.path + '.jpg';
@@ -473,6 +486,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         'love', 
         'lula',
         'lula-rosto',
+        'lucky-engomadinho',
         'minion-face',
         'oculos-opressor',
         'placa-direita', 
@@ -490,6 +504,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
         var url = 'img/recortes/' + item + '.png';
 
         return {
+            name: item,
             url: url,
             style: {
                 backgroundImage: 'url("$")'.replace('$', url)

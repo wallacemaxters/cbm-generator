@@ -237,10 +237,10 @@
                             <i class="fa fa-plus"> </i> para adicionar uma base do seu computador</p>
                     </div>
                     <div class="group">
-                        <input type="text" class="form-control" placeholder="Digite para pesquisar um source" ng-model="search">
+                        <input type="text" class="form-control" placeholder="Digite para pesquisar um source" ng-model="search.source">
                     </div>
                     <div class="clear group">
-                        <span ng-repeat="s in sources|filter:search|limitTo:10" ng-attr-title="{{ ::s.name }}">
+                        <span ng-repeat="s in sources|filter:search.source|limitTo:13" ng-attr-title="{{ ::s.name }}">
                             <a ng-click="addSource(s)" ng-style="::s.style" href="#" class="water-mark hover-big"></a>
                         </span>
                         <span>
@@ -258,8 +258,12 @@
                 </div>
                 <div class="group" ng-show="source">
                     <label>Selecionar um recorte</label>
+                    <div class="group">
+                        <input type="text" class="form-control" placeholder="Digite para pesquisar um recorte (PNG)" ng-model="search.cutouts">
+
+                    </div>
                     <div class="clear group">
-                        <span ng-repeat="c in cutouts">
+                        <span ng-repeat="c in cutouts | filter:search.cutouts | limitTo:12">
                             <a ng-click="addImage(c.url, 0.5)" ng-style="c.style" href="#" class="water-mark"></a>
                         </span>
                     </div>
