@@ -324,7 +324,13 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
             'une',
             'patriotica',
             'tv-cultura',
-            'pepsi'
+            'pepsi',
+            'barcelona',
+            'cbf',
+            'correios',
+            'spfc',
+            'fbi',
+            'gremio'
         ];
 
         return list.map(function (item) { 
