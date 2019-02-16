@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="uriqH9mnNs6nU3rxdxzu3Ez-Km1MtD-hrZksbVzOD5I" />
+    <title>CBM Generator - Gerador de Memes da Corrupção Brasileira Memes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/ui-cropper.css">
+    <link rel="stylesheet" href="css/flexboxgrid.min.css">
+    <link rel="stylesheet" href="css/angularjs-color-picker.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/selos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="keywords" content="memes, gerador de memes, meme, cbm generator, cbm, meme generator" />
+    <meta name="description" content="CBM Genetator - Gerador de memes do corrupção brasileira memes.">
+    <meta property="og:title" content="CBM Generator">
+    <meta property="og:image" content="/img/assets/cunha.png">
+    <meta property="og:description" content="Um gerador de memes para a página corrução brasileira memes">
+</head>
+
+<body ng-app="app">
+    <div class="header">
+        <h1>
+            <span class="cunha"></span>
+            <span>CBM Generator</span>
+        </h1>
+    </div>
+    <h2 class="text-center description">Um gerador de memes para a página corrução brasileira memes</h2>
+    <div class="container">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4119206527475379" data-ad-slot="4015700976" data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+    <div class="container" ng-controller="SobreController" ng-cloak>
+        <h2 class="page-title">Selos do Corrupção Brasileira Memes</h2>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="image in images">
+                <div class="card" >
+                    <h4>Selo {{ image.title }}</h4>
+                    <div class="card-image">
+                        <img  ng-attr-title="Selo CBM Generator - {{ image.title }}" ng-src="{{ image.url }}" ng-attr-alt="{{ image.title }}">
+                    </div>
+                    <a class="card-action" download ng-href="{{ image.url }}">
+                        Download
+                    </a>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <ins class="adsbygoogle" 
+            style="display:block" 
+            data-ad-client="ca-pub-4119206527475379" data-ad-slot="4015700976" data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+    <script src="js/tinycolor-min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/ng-file-upload-all.min.js"></script>
+    <script src="js/angularjs-color-picker.min.js"></script>
+    <script src="js/fabric.min.js"></script>
+    <script src="js/app.js?t=2018-08-08T01:31:38.709Z" ></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <script>
+        angular.module('app').controller('SobreController', function ($scope, $cbmWaterMarks) {
+            $scope.images = $cbmWaterMarks;
+        })
+    </script>
+</body>
+
+</html>

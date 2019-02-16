@@ -5,9 +5,20 @@
   "hosting": {
     "public": ".",
     "ignore": [
+      "database.rules.json",
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites" : [
+      {
+        "source" : "/selos",
+        "destination" : "/selos.html"
+      },
+      {
+        "source" : "/bases",
+        "destination" : "/bases.html"
+      }
     ]
   }
 }

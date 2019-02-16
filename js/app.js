@@ -339,6 +339,7 @@ angular.module('app', ['ngFileUpload', 'color.picker'])
             
             return {
                 url: url,
+                title: item,
                 style: {
                     backgroundImage: 'url("$")'.replace('$', url)
             }

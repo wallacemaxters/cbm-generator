@@ -41,6 +41,11 @@ h4{
     clear: both;
 }
 
+.link{
+    color: #049;
+    text-decoration: none
+}
+
 .group{
     margin: 15px 0;
 }
@@ -242,7 +247,14 @@ label{
 }
 
 
-.adsbygoogle{
-    margin-top: 15px;
-    background-color: #eee;
+.adsbygoogle:empty{
+    display: none;
+}
+
+#page-footer{
+    margin-top: 100px;
+}
+
+#page-footer a {
+    display: block;
 }

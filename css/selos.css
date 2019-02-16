@@ -1,0 +1,61 @@
+.card {
+    background-color: #fff;
+    margin-bottom: 15px;
+    padding: 15px;
+    height: calc(100% - 15px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .6);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column
+}
+
+
+.card .card-image
+{
+    text-align: center;
+}
+
+
+.card h4{
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.card .card-image{
+    flex: 1;
+}
+
+.card .card-image > img {
+    max-width: 100%;
+    height: 200px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, .5);
+
+}
+
+.card-action{
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+    border: 2px solid #222;
+    background-color: #222;
+    border-radius: 4px;
+    color: #fff;
+    transition: all 640ms linear;
+    margin-top: 15px;
+    align-self: end;
+    width: 100%;
+}
+
+
+.card-action:hover{
+    background-color: #fff;
+    color: #222;
+}
+
+
+.page-title{
+    margin: 30px 0;
+}

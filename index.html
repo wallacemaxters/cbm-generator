@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="uriqH9mnNs6nU3rxdxzu3Ez-Km1MtD-hrZksbVzOD5I" />
-    <title>CBM Generator</title>
+    <title>CBM Generator - Gerador de Memes da Corrupção Brasileira Memes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="css/ui-cropper.css">
     <link rel="stylesheet" href="css/flexboxgrid.min.css">
@@ -13,14 +13,6 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="js/tinycolor-min.js"></script>
-    <script src="js/angular.min.js"></script>
-    <script src="js/ng-file-upload-all.min.js"></script>
-    <script src="js/angularjs-color-picker.min.js"></script>
-    <script src="js/fabric.min.js"></script>
-    <script src="js/app.js?t=2018-08-08T01:31:38.709Z" defer></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     <meta name="keywords" content="memes, gerador de memes, meme, cbm generator, cbm, meme generator" />
     <meta name="description" content="CBM Genetator - Gerador de memes do corrupção brasileira memes.">
     <meta property="og:title" content="CBM Generator">
@@ -41,9 +33,7 @@
             data-full-width-responsive="true"></ins>
     </div>
     <div class="container" ng-controller="AppController" ng-cloak>
-
         <div id="editor-container">
-
             <div class="image-editor clear" ng-show="source">
                 <div class="group">
                     <button ngf-drop ngf-select ngf-change="addImageFromBlob($file)" ngf-accept="'image/*'" class="btn btn-primary" title="Adicionar Imagem do computador">
@@ -225,67 +215,82 @@
                     <kbd>CTRL+DELETE</kbd> para remover
                 </div>
             </div>
-            <div>
-
-                <div class="group" ng-show="source">
-                    <label>Selecione um Selo</label>
-                    <div class="clear group">
-                        <span ng-repeat="w in waterMarks">
-                            <a ng-click="selectWaterMark($index)" ng-style="w.style" class="water-mark" ng-class="{active: w === waterMark}"></a>
-                        </span>
-                    </div>
-                </div>
-                <div class="group" ng-hide="source">
-                    <h4>Selecione um source para seu meme</h4>
-                    <div class="help-block">
-                        <p>Para fazer o seu meme, começe selecionando um source (base).</p>
-                        <p>Clique no botão
-                            <i class="fa fa-plus"></i> para adicionar uma base do seu computador</p>
-                    </div>
-                    <div class="group">
-                        <input type="text" class="form-control" placeholder="Digite para pesquisar um source" ng-model="search.source">
-                    </div>
-                    <div class="clear group">
-                        <span ng-repeat="s in sources|filter:search.source|limitTo:13" ng-attr-title="{{ ::s.name }}">
-                            <a ng-click="addSource(s)" ng-style="::s.style" href="#" class="water-mark hover-big"></a>
-                        </span>
-                        <span>
-                            <a title="Adicionar source do computador" ngf-accept="'image/*'" ngf-drop ngf-select ngf-change="addSourceFromBlob($file)"
-                                class="water-mark icon">
-                                <i class="fa fa-plus"></i>
-                            </a>
-                        </span>
-                        <span>
-                            <a title="Adicionar source por link" ng-click="addSourceFromUrl($file)" class="water-mark icon">
-                                <i class="fa fa-link"></i>
-                            </a>
-                        </span>
-                    </div>
-                </div>
-                <div class="group" ng-show="source">
-                    <label>Selecionar um recorte</label>
-                    <div class="group">
-                        <input type="text" class="form-control" placeholder="Digite para pesquisar um recorte (PNG)" ng-model="search.cutouts">
-
-                    </div>
-                    <div class="clear group">
-                        <span ng-repeat="c in cutouts | filter:search.cutouts | limitTo:12">
-                            <a ng-click="addImage(c.url, 0.5)" ng-style="c.style" href="#" class="water-mark"></a>
-                        </span>
-                    </div>
+            <div class="group" ng-show="source">
+                <label>Selecione um Selo</label>
+                <div class="clear group">
+                    <span ng-repeat="w in waterMarks">
+                        <a ng-click="selectWaterMark($index)" ng-style="w.style" class="water-mark" ng-class="{active: w === waterMark}"></a>
+                    </span>
                 </div>
             </div>
+            <div class="group" ng-hide="source">
+                <h4>Selecione um source para seu meme</h4>
+                <div class="help-block">
+                    <p>Para fazer o seu meme, começe selecionando um source (base).</p>
+                    <p>Clique no botão
+                        <i class="fa fa-plus"></i> para adicionar uma base do seu computador</p>
+                </div>
+                <div class="group">
+                    <input type="text" class="form-control" placeholder="Digite para pesquisar um source" ng-model="search.source">
+                </div>
+                <div class="clear group">
+                    <span ng-repeat="s in sources|filter:search.source|limitTo:13" ng-attr-title="{{ ::s.name }}">
+                        <a ng-click="addSource(s)" ng-style="::s.style" href="#" class="water-mark hover-big"></a>
+                    </span>
+                    <span>
+                        <a title="Adicionar source do computador" ngf-accept="'image/*'" ngf-drop ngf-select ngf-change="addSourceFromBlob($file)"
+                            class="water-mark icon">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </span>
+                    <span>
+                        <a title="Adicionar source por link" ng-click="addSourceFromUrl($file)" class="water-mark icon">
+                            <i class="fa fa-link"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <div class="group" ng-show="source">
+                <label>Selecionar um recorte</label>
+                <div class="group">
+                    <input type="text" class="form-control" placeholder="Digite para pesquisar um recorte (PNG)" ng-model="search.cutouts">
 
+                </div>
+                <div class="clear group">
+                    <span ng-repeat="c in cutouts | filter:search.cutouts | limitTo:12">
+                        <a ng-click="addImage(c.url, 0.5)" ng-style="c.style" href="#" class="water-mark"></a>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="container">
-       
-        <!-- CBM Generator -->
-        <ins class="adsbygoogle" 
-            style="display:block" 
-            data-ad-client="ca-pub-4119206527475379" data-ad-slot="4015700976" data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
+    <div class="container">       
+        <!-- Cbm Generator - Gráficos -->
+        <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-4119206527475379"
+                data-ad-slot="7774041254"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+
     </div>
+    <footer id="page-footer">
+        <div class="container">
+            <strong>Veja também:</strong>        
+            <a href="/bases" class="link">Base de memes</a>
+            <a href="/selos" class="link">Selos Corrupção Brasileira Memes</a>
+        </div>
+    </footer>
+
+    <script src="js/tinycolor-min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/ng-file-upload-all.min.js"></script>
+    <script src="js/angularjs-color-picker.min.js"></script>
+    <script src="js/fabric.min.js"></script>
+    <script src="js/app.js?t=2018-08-08T01:31:38.709Z" ></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
 </body>
 
 </html>
