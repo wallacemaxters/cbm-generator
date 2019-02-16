@@ -223,6 +223,12 @@ label{
     align-items: center;
 }
 
+.description{
+    font-size: 12px;
+    padding: 10px;
+    font-weight: normal;
+}
+
 
 .cunha{
     background-image: url("/img/assets/cunha.png");
